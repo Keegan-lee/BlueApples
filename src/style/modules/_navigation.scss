@@ -1,0 +1,41 @@
+
+$menuWidth: 20%;
+
+nav {
+    width: $menuWidth;
+    height: 100%;
+    border-right: 5px solid $black !important;
+
+    .navbar-header {
+        width: 100%;
+        height:60vh;
+    }
+
+    .navbar-nav {
+        width: 100%;
+
+        li {
+            width: 100%;
+            text-align: center;
+            font-size: 2rem;
+
+            a {
+                margin:5px;
+            }
+
+            .active {
+                border-right: 5px solid $blue;
+                border-left: 5px solid $blue;
+                padding-right: 20px;
+                padding-left: 20px;
+            }
+        }
+    }
+
+    #brandIcon {
+        background: url($logoText) no-repeat center;
+        width: 100%;
+        height:100%;
+        margin: 0 auto;
+    }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "blue-apples.org",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Keegan Francis"
+  ],
+  "license": "ISC",
+  "homepage": "index.html",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.4",
+    "angular-bootstrap": "^2.5.0",
+    "angular-snipcart": "^0.1.0",
+    "jquery": "^3.2.1",
+    "bootstrap": "^3.3.7",
+    "angular-ui-router": "^1.0.3"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "dist/css/bootstrap.min.css"
+      ]
+    }
+  }
+}

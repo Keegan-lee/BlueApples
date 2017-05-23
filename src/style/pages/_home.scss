@@ -1,0 +1,32 @@
+#home {
+    #headerIMG {
+        background: url($headerIMG);
+        height: $headerIMGHeight;
+        margin-bottom: 25px;
+    }
+
+    .menuItem {
+        margin-bottom: 5px;
+        background-color: $blue;
+        border: 1px solid $black;
+
+        &:hover {
+            background-color: $blueHover;
+            cursor: pointer;
+        }
+
+        h5, p {
+            color:white;
+        }
+
+        h5 {
+            font-size: 1.2em;
+        }
+
+        .icon {
+            img {
+                padding: 10px;
+            }
+        }
+    }
+}

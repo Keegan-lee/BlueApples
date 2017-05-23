@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang='en' ng-app='app' ng-controller='MainCtrl' ng-init='init()'>
+<head>
+	<title ng-bind="state.current.data.title"></title>
+
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Welcome to Blue Apples, we offer a wide variety of services and products that aid in your physical, mental and spiritual health.">
+    <meta name="author" content="Keegan Francis">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/ico" href="img/favicon.ico" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- <link rel="shortcut icon" href="favicon.ico" type="image/ico" /> -->
+
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script> -->
+
+	<!-- <script src="https://cdn.snipcart.com/scripts/2.0/snipcart.js" id="snipcart" data-api-key="YThlMjFiN2ItMzg5MS00MTQ2LTgxZmYtYTViNjQyMzMwMDRkNjM2Mjc2MzUzNzI4NTg0MjUw" data-autopop="false"></script> -->
+
+	<!-- <link href="https://cdn.snipcart.com/themes/2.0/base/snipcart.min.css" type="text/css" rel="stylesheet" /> -->
+
+    <!-- bower:css -->
+    <!-- endbower -->
+
+	<!-- inject:css -->
+	<!-- endinject -->
+</head>
+<body class='container-fluid'>
+	<nav class='navbar navbar-default navbar-fixed-top navbar-inverse'>
+		<div class='container-fluid'>
+			<div class='navbar-header'>
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mobileNavbar">
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			    </button>
+				<a id='brandIcon' class='navbar-brand' ui-sref='home'></a>
+			</div>
+
+			<div class='collapse navbar-collapse'>
+				<ul class="nav navbar-nav">
+					<li ng-repeat='r in routes track by $index'>
+						<a ng-if='$index == 2' target='_blank' href="https://www.facebook.com/BlueApplesNaturals/events/">Events</a>
+						<a data-toggle="collapse" data-target="#mobileNavbar" ng-class='{ active: isActive(r.url, 1)}' ui-sref="{{ r.route }}">
+							{{ r.name }}
+						</a>
+					</li>
+			    </ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 menuOpen' id='view' ui-view></div>
+
+	<script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+
+    <!-- bower:js -->
+    <!-- endbower -->
+
+	<!-- inject:js -->
+	<!-- endinject -->
+</body>
+</html>

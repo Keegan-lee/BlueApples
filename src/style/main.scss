@@ -1,0 +1,40 @@
+@import 'pallets/_pallet';
+
+@import 'globals/_images';
+@import 'globals/_global';
+
+@import 'modules/_hoverEffect';
+@import 'modules/_navigation';
+
+
+@import 'pages/_home';
+
+html {
+    height: 100vh;
+}
+
+h1, h2, h3 {
+    font-family: 'Herculanum';
+    color:white;
+}
+
+body {
+    height: 100vh;
+    padding:0 !important;
+    background: url($background) no-repeat;
+    background-size: cover;
+
+    #view {
+        height: 100%;
+        margin-top: $topViewMargin;
+        &.menuOpen {
+            width: calc(100% - #{$menuWidth});
+            margin-left: $menuWidth;
+        }
+
+        &.menuClosed {
+            width: 100%;
+            margin-left: 0;
+        }
+    }
+}
