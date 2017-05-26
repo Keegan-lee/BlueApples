@@ -1,1 +1,86 @@
-<h1>Services</h1>
+<div id='services' class='container' ng-init='init()'>
+	<div class='row'>
+		<h1 class='span12'>Services</h1>
+            <script type="text/ng-template" id="group-template.html">
+                <div class="panel-heading">
+                    <h4 class="panel-title" style="color:#fa39c3">
+                        <a href tabindex="0" class="accordion-toggle" ng-click="toggleOpen()" uib-accordion-transclude="heading">
+                            <span uib-accordion-header ng-class="{'text-muted': isDisabled}">
+                                {{heading}}
+                            </span>
+                        </a>
+                    </h4>
+                </div>
+                <div class="panel-collapse collapse" uib-collapse="!isOpen">
+                    <div class="panel-body" style="text-align: right" ng-transclude></div>
+                </div>
+            </script>
+
+
+            <uib-accordion id='servicesAccordion' close-other='oneAtAtime'>
+                <div uib-accordion-group ng-repeat='service in services track by $index' class="panel-default service container" heading="{{ service.title }}" is-open='$first'>
+                    <div class='col-xs-12 col-sm-12 col-md-8 col-lg-8'>
+                        <h3 class='title'>{{ service.name }}</h3>
+                        <ul class='tags'>
+                            <li class='tag' ng-repeat='tag in service.tags track by $index'>
+                                {{ tag }} <span ng-if='!$last && service.tags.length > 1'>, </span>
+                            </li>
+                        </ul>
+
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 content" ng-if='service.content[0]'>
+                            <p ng-if='service.content[0].type == "text"'>{{ service.content[0].data }}</p>
+                            <ul ng-if='service.content[0].type == "list"'>
+                                <il ng-repeat='item in service.content[0].data track by $index'>{{ item }}</il>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 img">
+                        <img ng-src='{{ service.img.src }}' ng-alt='{{ service.img.alt }}'/>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 content" ng-repeat='section in service.content track by $index' ng-if='!$first'>
+                        <p ng-if='section.type == "text"'>{{ section.data }}</p>
+                        <div ng-if='section.type == "list"'>
+                            <p class='listTitle'>{{ section.title }}</p>
+                            <ul ng-if='section.type == "list"'>
+                                <il ng-repeat='item in section.data track by $index'>{{ item }}</il>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </uib-accordion>
+
+            <!-- <uib-accordion close-others="oneAtATime">
+                <div uib-accordion-group class="panel-default" heading="Static Header, initially expanded" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+                    This content is straight in the template.
+                </div>
+                <div uib-accordion-group class="panel-default" heading="{{group.title}}" ng-repeat="group in groups">
+                    {{group.content}}
+                </div>
+                <div uib-accordion-group class="panel-default" heading="Dynamic Body Content">
+                    <p>The body of the uib-accordion group grows to fit the contents</p>
+                    <button type="button" class="btn btn-default btn-sm" ng-click="addItem()">Add Item</button>
+                    <div ng-repeat="item in items">{{item}}</div>
+                </div>
+                <div uib-accordion-group class="panel-default" heading="Custom template" template-url="group-template.html">
+                    Hello
+                </div>
+                <div uib-accordion-group class="panel-default" is-open="status.isCustomHeaderOpen" template-url="group-template.html">
+                    <uib-accordion-heading>
+                        Custom template with custom header template <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.isCustomHeaderOpen, 'glyphicon-chevron-right': !status.isCustomHeaderOpen}"></i>
+                    </uib-accordion-heading>
+                    World
+                </div>
+                <div uib-accordion-group class="panel-danger" heading="Delete account">
+                    <p>Please, to delete your account, click the button below</p>
+                    <button class="btn btn-danger">Delete</button>
+                </div>
+                <div uib-accordion-group class="panel-default" is-open="status.open">
+                    <uib-accordion-heading>
+                        I can have markup, too! <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                    </uib-accordion-heading>
+                    This is just some content to illustrate fancy headings.
+                    </div>
+              </uib-accordion> -->
+	</div> <!-- row -->
+</div> <!-- services container -->

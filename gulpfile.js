@@ -147,7 +147,12 @@ gulp.task('bower', function() {
 
 gulp.task('inject', ['style', 'bower'], function() {
 
-	var injectFiles = gulp.src(srcPaths.npmJS.concat(srcPaths.npmCSS).concat(srcPaths.javascript).concat(destPaths.style.files).concat(srcPaths.controllers).concat(srcPaths.services).concat(srcPaths.components));
+	var injectFiles = gulp.src(srcPaths.npmJS.concat(srcPaths.npmCSS)
+											.concat(srcPaths.javascript)
+											.concat(destPaths.style.files)
+											.concat(srcPaths.controllers)
+											.concat(srcPaths.services)
+											.concat(srcPaths.components));
 	var injectOptions = {
 		addRootSlash : false,
 		ignorePath : ['public', 'src']

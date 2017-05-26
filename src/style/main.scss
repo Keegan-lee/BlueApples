@@ -2,12 +2,14 @@
 
 @import 'globals/_images';
 @import 'globals/_global';
+@import 'globals/_fonts';
 
 @import 'modules/_hoverEffect';
 @import 'modules/_navigation';
-
+@import 'modules/_loadingScreen';
 
 @import 'pages/_home';
+@import 'pages/_services';
 
 html {
     height: 100vh;
@@ -16,6 +18,10 @@ html {
 h1, h2, h3 {
     font-family: 'Herculanum';
     color:white;
+}
+
+p, a, h4, h5, h6, li {
+    font-family: 'Source Sans Pro';
 }
 
 body {

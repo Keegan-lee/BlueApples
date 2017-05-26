@@ -1,0 +1,33 @@
+.pg-loading-logo {
+    opacity: .75;
+}
+
+.sk-cube-grid {
+    background-color: $blue;
+    height: $cubeSize;
+    width:$cubeSize;
+    transform: rotate(135deg);
+}
+
+.sk-cube1, .sk-cube2, .sk-cube3, .sk-cube4, .sk-cube5, .sk-cube6, .sk-cube7, .sk-cube8, .sk-cube9 {
+    background-color:$white !important;
+    opacity: .75;
+}
+
+
+// .sk-cube1, .sk-cube7 {
+//     background-color:$green !important;
+// }
+//
+// .sk-cube5 {
+//     background-color:$white !important;
+// }
+//
+// .sk-cube8, .sk-cube6, .sk-cube2, {
+//     background-color:$red !important;
+// }
+//
+//
+//  .sk-cube3, .sk-cube4, .sk-cube9 {
+//      background-color: $yellow !important;
+//  }

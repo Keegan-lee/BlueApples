@@ -1,6 +1,6 @@
 "use strict";
 
-var app = angular.module('app', ['ui.router'])
+var app = angular.module('app', ['ui.router', 'ui.bootstrap'])
 
     .config(function($stateProvider, $urlRouterProvider, $qProvider) {
         $urlRouterProvider.otherwise('/home');
@@ -107,4 +107,8 @@ var app = angular.module('app', ['ui.router'])
         $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
 
         });
+
+        angular.element(document).ready(function() {
+    		window.loadingScreen.finish();
+    	});
     }]);
