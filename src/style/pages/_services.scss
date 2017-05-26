@@ -69,13 +69,12 @@ $glyphiconSize: 50px;
                         display: list-item;
                     }
                 }
-            }    
+            }
 
             .contact {
-
                 background-color: $white;
 
-                .glyphicon {
+                i {
                     font-size: $glyphiconSize;
                 }
             }

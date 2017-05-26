@@ -23,7 +23,7 @@
     "SpinKit": "spinkit#^1.2.5",
     "bootstrap": "^3.3.7",
     "angular-ui-router": "^1.0.3",
-    "v-accordion": "^1.6.0"
+    "font-awesome": "^4.7.0"
   },
   "overrides": {
     "bootstrap": {
@@ -31,8 +31,15 @@
         "dist/css/bootstrap.min.css"
       ]
     },
-    "please-wait" : {
-        "main": ["build/please-wait.css"]
+    "please-wait": {
+      "main": [
+        "build/please-wait.css"
+      ]
+    },
+    "font-awesome": {
+      "main": [
+        "css/font-awesome.min.css"
+      ]
     }
   }
 }

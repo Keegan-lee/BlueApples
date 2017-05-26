@@ -50,57 +50,26 @@
                     <hr/>
 
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 contact">
-                        <a href="tel:{{ service.contact.phone }}" ng-if='service.contact.phone' >
-                            <span class='col-xs-2 col-sm-2 col-md-2 col-lg-2 glyphicon glyphicon-earphone'>
+                        <a class='col-xs-2 col-sm-2 col-md-2 col-lg-2' href="tel:{{ service.contact.phone }}" ng-if='service.contact.phone' >
+                            <i class='fa fa-phone'></i>
                                 <!-- <span class='smallText bold'>{{ service.contact.phone }}</span> -->
-                            </span>
+
                         </a>
 
-                        <a href='mailto:{{ service.contact.email }}' ng-if='service.contact.email'>
-                            <span class='col-xs-2 col-sm-2 col-md-2 col-lg-2 glyphicon glyphicon-envelope'>
-                                <!-- <span class='smallText bold'>{{ service.contact.email }}</span> -->
-                            </span>
+                        <a class='col-xs-2 col-sm-2 col-md-2 col-lg-2' href='mailto:{{ service.contact.email }}' ng-if='service.contact.email'>
+                            <i class='fa fa-envelope'></i>
+                            <!-- <span class='smallText bold'>{{ service.contact.email }}</span> -->
                         </a>
 
-                        <a href="{{ service.contact.book }}" ng-if='service.contact.book'>
-                            <span class='col-xs-2 col-sm-2 col-md-2 col-lg-2 glyphicon glyphicon-calendar'>
-                            </span>
+                        <a class='col-xs-2 col-sm-2 col-md-2 col-lg-2' href="{{ service.contact.book }}" ng-if='service.contact.book'>
+                            <i class='fa fa-calendar'></i>
                         </a>
+
+						<a class='col-xs-2 col-sm-2 col-md-2 col-lg-2' href="{{ service.contact.facebook }}" ng-if='service.contact.facebook'>
+							<i class="fa fa-facebook"></i>
+						</a>
                     </div>
                 </div>
             </uib-accordion>
-
-            <!-- <uib-accordion close-others="oneAtATime">
-                <div uib-accordion-group class="panel-default" heading="Static Header, initially expanded" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
-                    This content is straight in the template.
-                </div>
-                <div uib-accordion-group class="panel-default" heading="{{group.title}}" ng-repeat="group in groups">
-                    {{group.content}}
-                </div>
-                <div uib-accordion-group class="panel-default" heading="Dynamic Body Content">
-                    <p>The body of the uib-accordion group grows to fit the contents</p>
-                    <button type="button" class="btn btn-default btn-sm" ng-click="addItem()">Add Item</button>
-                    <div ng-repeat="item in items">{{item}}</div>
-                </div>
-                <div uib-accordion-group class="panel-default" heading="Custom template" template-url="group-template.html">
-                    Hello
-                </div>
-                <div uib-accordion-group class="panel-default" is-open="status.isCustomHeaderOpen" template-url="group-template.html">
-                    <uib-accordion-heading>
-                        Custom template with custom header template <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.isCustomHeaderOpen, 'glyphicon-chevron-right': !status.isCustomHeaderOpen}"></i>
-                    </uib-accordion-heading>
-                    World
-                </div>
-                <div uib-accordion-group class="panel-danger" heading="Delete account">
-                    <p>Please, to delete your account, click the button below</p>
-                    <button class="btn btn-danger">Delete</button>
-                </div>
-                <div uib-accordion-group class="panel-default" is-open="status.open">
-                    <uib-accordion-heading>
-                        I can have markup, too! <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-                    </uib-accordion-heading>
-                    This is just some content to illustrate fancy headings.
-                    </div>
-              </uib-accordion> -->
 	</div> <!-- row -->
 </div> <!-- services container -->
