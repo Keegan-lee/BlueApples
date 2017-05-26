@@ -42,10 +42,30 @@
                         <div ng-if='section.type == "list"'>
                             <p class='listTitle'>{{ section.title }}</p>
                             <ul ng-if='section.type == "list"'>
-                                <il ng-repeat='item in section.data track by $index'>{{ item }}</il>
+                                <li ng-repeat='item in section.data track by $index'>{{ item }}</li>
                             </ul>
                         </div>
+                    </div>
 
+                    <hr/>
+
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 contact">
+                        <a href="tel:{{ service.contact.phone }}" ng-if='service.contact.phone' >
+                            <span class='col-xs-2 col-sm-2 col-md-2 col-lg-2 glyphicon glyphicon-earphone'>
+                                <!-- <span class='smallText bold'>{{ service.contact.phone }}</span> -->
+                            </span>
+                        </a>
+
+                        <a href='mailto:{{ service.contact.email }}' ng-if='service.contact.email'>
+                            <span class='col-xs-2 col-sm-2 col-md-2 col-lg-2 glyphicon glyphicon-envelope'>
+                                <!-- <span class='smallText bold'>{{ service.contact.email }}</span> -->
+                            </span>
+                        </a>
+
+                        <a href="{{ service.contact.book }}" ng-if='service.contact.book'>
+                            <span class='col-xs-2 col-sm-2 col-md-2 col-lg-2 glyphicon glyphicon-calendar'>
+                            </span>
+                        </a>
                     </div>
                 </div>
             </uib-accordion>

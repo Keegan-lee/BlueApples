@@ -24,6 +24,11 @@ p, a, h4, h5, h6, li {
     font-family: 'Source Sans Pro';
 }
 
+hr {
+    width: 100%;
+    border-color: $silver;
+}
+
 body {
     height: 100vh;
     padding:0 !important;

@@ -1,3 +1,5 @@
+$glyphiconSize: 50px;
+
 #services {
     #servicesAccordion {
         width:20%;
@@ -43,13 +45,12 @@
                 padding:0;
                 text-align: center;
                 .tag {
-                    font-size: 1.4em;
+                    font-size: 1.75em;
                     display: inline;
                 }
             }
 
             .img {
-
                 img {
                     display: block;
                     max-height: 400px;
@@ -59,7 +60,24 @@
             }
 
             .content {
+                margin-bottom: 25px;
                 color: $black;
+                font-size: 1.25em;
+
+                ul {
+                    li {
+                        display: list-item;
+                    }
+                }
+            }    
+
+            .contact {
+
+                background-color: $white;
+
+                .glyphicon {
+                    font-size: $glyphiconSize;
+                }
             }
         }
     }
