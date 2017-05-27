@@ -1,6 +1,7 @@
 language: node_js
 node_js:
   - 'node'
-before_script:
-  - sudo bower install
-  - gulp buildAll
+before_install:
+  - npm install bower
+  - bower install
+sudo: required
