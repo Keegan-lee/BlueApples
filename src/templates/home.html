@@ -18,11 +18,11 @@
 		</div>
 
 		<div class='col-xs-12 col-sm-12 col-md-6 col-lg-6 container'>
-			<div class='hovereffect red'>
-				<img class='img-responsive' src="./img/BlueApples.jpg" ng-alt='Vegan Resteraunt Menu'>
+			<div class='hovereffect black'>
+				<img class='img-responsive' ng-src="{{ content.img1[randomPhoto].src }}" ng-alt='{{ content.img1[randomPhoto].alt }}'>
 				<div class='overlay'>
-					<h2>Vegan Resteraunt</h2>
-					<p><a ui-sref='services'>View Menu Options</a></p>
+					<h2>{{ content.img1[randomPhoto].title }}</h2>
+					<p><a ui-sref='content.img1[randomPhoto].link'>{{ content.img1[randomPhoto].linkText }}</a></p>
 				</div>
 			</div>
 		</div>
