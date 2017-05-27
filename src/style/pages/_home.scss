@@ -12,6 +12,7 @@
         margin-bottom: 5px;
         background-color: $blue;
         border: 1px solid $black;
+        height:80px;
 
         &:hover {
             background-color: $blueHover;
@@ -28,7 +29,8 @@
 
         .icon {
             img {
-                padding: 10px;
+                height: 40px;
+                margin-top: 15px;
             }
         }
     }

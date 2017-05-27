@@ -8,20 +8,20 @@
 @import 'modules/_navigation';
 @import 'modules/_loadingScreen';
 
-
 @import 'pages/_home';
 @import 'pages/_services';
+@import 'pages/contact';
 
 html {
     height: 100vh;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
     font-family: 'Herculanum';
     color:white;
 }
 
-p, a, h4, h5, h6, li {
+p, a, h5, h6, li {
     font-family: 'Source Sans Pro';
 }
 
@@ -34,6 +34,7 @@ body {
     height: 100vh;
     padding:0 !important;
     background: url($background) no-repeat;
+    background-color: $blue;
     background-size: cover;
 
     #view {

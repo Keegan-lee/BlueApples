@@ -1,5 +1,12 @@
 app.controller('ContactCtrl', function($scope, $q, databaseService) {
-    $scope.init = function() {
 
+    const contentRef = "/content/pages/contact";
+
+    $scope.content;
+
+    $scope.init = function() {
+        $q.when(databaseService.getRef(contentRef).then(function(response) {
+            $scope.content = response;
+        }));
     };
 });

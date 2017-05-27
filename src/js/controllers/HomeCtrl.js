@@ -12,7 +12,13 @@ app.controller('HomeCtrl', function($scope, databaseService, $q) {
 
             $scope.menu = $scope.content.menu;
 
-            $scope.randomPhoto = Math.round((Math.random() * $scope.content.img1.length - 1));
+            console.log($scope.content.img1.length);
+
+            $scope.randomPhoto = Math.floor((Math.random() * $scope.content.img1.length - 1));
+            $scope.randomPhotoA = Math.floor((Math.random() * $scope.content.img1.length));
+            console.log($scope.randomPhoto);
+            console.log($scope.randomPhotoA);
+
         });
     };
 

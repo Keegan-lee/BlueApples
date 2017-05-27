@@ -1,4 +1,5 @@
 $glyphiconSize: 50px;
+$borderRadius: 30px;
 
 #services {
     #servicesAccordion {
@@ -6,10 +7,22 @@ $glyphiconSize: 50px;
         .service {
             margin: 0px 20px 25px 20px;
             padding:0;
+            border-radius: $borderRadius;            
 
             .panel-heading {
                 background-color: $silver;
                 border:none;
+                border-top-left-radius: $borderRadius;
+                border-top-right-radius: $borderRadius;
+                border-bottom: 2px dashed $black;
+
+
+                &[aria-selected='false'] {
+                    border-radius: $borderRadius;
+                    border-bottom: 0;
+                }
+
+
                 .panel-title {
 
                     & * {
@@ -34,54 +47,57 @@ $glyphiconSize: 50px;
                 }
             }
 
-            .title {
-                color: $blue;
-                text-align: center;
-                font-size: 2.8em;
-            }
-
-            .tags {
-                list-style-type: none;
-                padding:0;
-                text-align: center;
-                .tag {
-                    font-size: 1.75em;
-                    display: inline;
+            .panel-collapse {
+                border-radius: $borderRadius;
+                .title {
+                    color: $blue;
+                    text-align: center;
+                    font-size: 2.8em;
                 }
-            }
 
-            .img {
-                img {
-                    display: block;
-                    max-height: 400px;
-                    margin: 0 auto;
-                    max-width: 100%;
-                }
-            }
-
-            .content {
-                margin-bottom: 25px;
-                color: $black;
-                font-size: 1.25em;
-
-                ul {
-                    li {
-                        display: list-item;
+                .tags {
+                    list-style-type: none;
+                    padding:0;
+                    text-align: center;
+                    .tag {
+                        font-size: 1.75em;
+                        display: inline;
                     }
                 }
 
-                .quote {
-                    padding: 25px 50px 0px 50px;
-                    color: $blue;
-                    font-size: 1.5em;
+                .img {
+                    img {
+                        display: block;
+                        max-height: 400px;
+                        margin: 0 auto;
+                        max-width: 100%;
+                    }
                 }
-            }
 
-            .contact {
-                background-color: $white;
+                .content {
+                    margin-bottom: 25px;
+                    color: $black;
+                    font-size: 1.25em;
 
-                i {
-                    font-size: $glyphiconSize;
+                    ul {
+                        li {
+                            display: list-item;
+                        }
+                    }
+
+                    .quote {
+                        padding: 25px 50px 0px 50px;
+                        color: $blue;
+                        font-size: 1.5em;
+                    }
+                }
+
+                .contact {
+                    background-color: $white;
+
+                    i {
+                        font-size: $glyphiconSize;
+                    }
                 }
             }
         }

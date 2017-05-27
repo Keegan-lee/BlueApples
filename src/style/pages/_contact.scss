@@ -1,0 +1,51 @@
+#contact {
+    .hoursTitle {
+        font-size: 2em;
+    }
+
+    .hours {
+        $hourHeight: 100px;
+
+        .open, .closed {
+            background-color: $silver;
+            height: $hourHeight;
+            line-height: $hourHeight;
+            padding:0;
+            text-align: center;
+            border-radius:30px;
+
+            & > * {
+                line-height: $hourHeight;
+                border-radius:30px;
+            }
+
+            h6, p {
+                margin: 0;
+            }
+
+            h6 {
+                font-size: 2em;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+
+            p {
+                font-size: 1.2em;
+                font-weight: bold;
+            }
+        }
+
+        .open {
+            margin-bottom: 25px;
+            h6 {
+                background-color: $green;
+            }
+        }
+
+        .closed {
+            h6 {
+                background-color: $red;
+            }
+        }
+    }
+}
