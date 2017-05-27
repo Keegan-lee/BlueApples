@@ -50,4 +50,8 @@ app.controller('MainCtrl', function($scope, $state, $rootScope, $q, authService,
 		}
 		return false;
 	};
+
+    $scope.test = function() {
+        return 1;
+    }
 });

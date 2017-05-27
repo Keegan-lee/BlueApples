@@ -32,7 +32,8 @@ var srcPaths = {
 	favicon: './src/favicon.ico',
 	htaccess: './src/.htaccess',
 	shop: './src/shop/**/*.*',
-	data: './src/data/**/*.*'
+	data: './src/data/**/*.*',
+	bower: './bower_components/**/*.*'
 }
 
 var destPaths = {
@@ -49,7 +50,8 @@ var destPaths = {
 	},
 	img: './public/img/',
 	shop: './public/shop',
-	data: './public/data/'
+	data: './public/data/',
+	bower: './public/bower_components/'
 };
 
 gulp.task('watch', function() {
@@ -139,9 +141,19 @@ gulp.task('shop',['data'], function() {
 		.pipe(gulp.dest(destPaths.shop));
 });
 
-gulp.task('bower', function() {
+gulp.task('bower_components', function() {
+	return gulp.src(srcPaths.bower)
+		.pipe(gulp.dest(destPaths.bower));
+});
+
+gulp.task('bower', ['bower_components'], function() {
+	var options = {
+		ignorePath: './public',
+		directory: './public/bower_components/'
+	}
+
 	return gulp.src(srcPaths.index)
-		.pipe(wiredep())
+		.pipe(wiredep(options))
 		.pipe(gulp.dest(destPaths.dest));
 });
 
