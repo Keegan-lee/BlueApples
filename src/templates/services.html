@@ -39,6 +39,9 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 content" ng-repeat='section in service.content track by $index' ng-if='!$first'>
                         <p ng-if='section.type == "text"'>{{ section.data }}</p>
+
+						<p ng-if='section.type == "quote"' class='quote'>"{{ section.data }}"</p>
+
                         <div ng-if='section.type == "list"'>
                             <p class='listTitle'>{{ section.title }}</p>
                             <ul ng-if='section.type == "list"'>
