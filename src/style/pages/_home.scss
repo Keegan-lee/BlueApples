@@ -1,6 +1,9 @@
 #home {
     #headerIMG {
         background: url($headerIMG);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
         height: $headerIMGHeight;
         margin-bottom: 25px;
     }
