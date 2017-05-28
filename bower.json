@@ -23,7 +23,8 @@
     "SpinKit": "spinkit#^1.2.5",
     "bootstrap": "^3.3.7",
     "angular-ui-router": "^1.0.3",
-    "font-awesome": "^4.7.0"
+    "font-awesome": "^4.7.0",
+    "angular-mocks": "^1.6.4"
   },
   "overrides": {
     "bootstrap": {
