@@ -1,8 +1,14 @@
 $topViewMargin: 10vh;
+$bottomViewMargin: 10vh;
+
 $headerIMGHeight: 20vh;
 
 $cubeSize: 60px;
 
+
+.centerText {
+    text-align: center;
+}
 
 .tinyText {
     font-size: .4em;
@@ -26,4 +32,24 @@ $cubeSize: 60px;
 
 .bold {
     font-weight: bold;
+}
+
+.m-top-10 {
+    margin-top: 10px;
+}
+
+.m-top-20 {
+    margin-top: 20px;
+}
+
+.m-top-25 {
+    margin-top: 25px;
+}
+
+.m-top-30 {
+    margin-top: 30px;
+}
+
+.m-top-50 {
+    margin-top: 50px;
 }

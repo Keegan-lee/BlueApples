@@ -3,14 +3,18 @@
 @import 'globals/_images';
 @import 'globals/_global';
 @import 'globals/_fonts';
+@import 'globals/_forms';
 
 @import 'modules/_hoverEffect';
 @import 'modules/_navigation';
 @import 'modules/_loadingScreen';
+@import 'modules/_loading';
 
 @import 'pages/_home';
 @import 'pages/_services';
-@import 'pages/contact';
+@import 'pages/_contact';
+
+@import 'forms/_contactForm';
 
 html {
     height: 100vh;
@@ -21,7 +25,7 @@ h1, h2, h3, h4 {
     color:white;
 }
 
-p, a, h5, h6, li {
+p, a, h5, h6, li, input, textarea {
     font-family: 'Source Sans Pro';
 }
 
@@ -40,6 +44,7 @@ body {
     #view {
         height: 100%;
         margin-top: $topViewMargin;
+        margin-bottom: $bottomViewMargin;
         &.menuOpen {
             width: calc(100% - #{$menuWidth});
             margin-left: $menuWidth;

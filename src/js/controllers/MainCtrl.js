@@ -6,6 +6,10 @@ app.controller('MainCtrl', function($scope, $state, $rootScope, $q, authService,
 
     $scope.routes;
 
+    $rootScope.textRegex = /^[A-z\'\- ]+$/;
+    $rootScope.emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    $rootScope.required = true;
+
     var config = {
       apiKey: "AIzaSyCpd6hy3789XuQGrKicinAQiAKqmWl1u-o",
       authDomain: "blue-apples-d0123.firebaseapp.com",

@@ -1,0 +1,45 @@
+<div id='contactForm' ng-controller='ContactFormCtrl' class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+    <form name='form' ng-submit='submit($event)'>
+    	<div id='info' class='col-md-4'>
+    		<input name='name' ng-model='name' ng-pattern='textRegex' placeholder="Name" ng-class="{ valid: form.name.$valid, invalid: form.name.$invalid, pristine: form.name.$pristine }" ng-required='required' autofocus />
+    		<input name='email' ng-model='email' ng-pattern='emailRegex' type='email' placeholder="Email" ng-class="{ valid: form.email.$valid, invalid: form.email.$invalid, pristine: form.email.$pristine }" ng-required='required' />
+    		<input name='subject' ng-model='subject' ng-pattern='textRegex' placeholder="Subject" ng-class="{ valid: form.subject.$valid, invalid: form.subject.$invalid, pristine: form.subject.$pristine }" ng-required='required' />
+    	</div>
+
+    	<div id='message' class='col-md-8'>
+    		<textarea name='message' ng-model='message' placeholder="Your Message Here" ng-class="{ valid: form.message.$valid, invalid: form.message.$invalid, pristine: form.message.$pristine }" required ></textarea>
+    	</div>
+
+    	<div id='button' class='col-md-12'>
+    		<button ng-class='result' type='submit' value='Submit'>Send</button>
+    	</div>
+
+        <div ng-if='!resultMessage && submitClicked' class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+            <div class="loading">
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+                <div class="loading-bar"></div>
+            </div>
+        </div>
+
+    	<div ng-if='resultMessage' id='resultMessage' class='col-md-12'>
+    		<p>{{ resultMessage }}</p>
+    	</div>
+
+
+        <div ng-if='content.debug'>
+            <p style='color:white'>Name: {{ form.name }}</p>
+            <p style='color:white'>Email: {{ form.email }}</p>
+            <p style='color:white'>Subject: {{ form.subject }}</p>
+            <p style='color:white'>Message: {{ form.message }}</p>
+            <br />
+            <p style='color:white'>Name: {{ form.name.$error.pattern }}</p>
+            <p style='color:white'>Email: {{ form.email.$error.pattern }}</p>
+            <p style='color:white'>Subject: {{ form.subject.$error.pattern }}</p>
+            <p style='color:white'>Message: {{ form.message.$error.pattern }}</p>
+            <br />
+            <p style='color:white'>Valid: {{ form.$valid }}</p>
+        </div>
+    </form>
+</div>

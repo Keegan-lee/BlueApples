@@ -1,0 +1,70 @@
+input {
+    border: 0;
+    background-color: transparent;
+    width: 100%;
+    margin-bottom: 5px;
+    border-bottom: 1px solid $silver;
+    color: $white;
+
+    &.valid {
+        border-bottom: 1px solid $green;
+    }
+
+    &.invalid {
+        border-bottom: 1px solid $red;
+    }
+
+    &.pristine {
+        border-bottom: 1px solid $silver;
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+textarea {
+    border: 0;
+    background-color: $white;
+    color: $grey;
+    width: 100%;
+    max-width: 100%;
+    height: 100px;
+
+    &.valid {
+        border: 2px solid $green;
+    }
+
+    &.invalid {
+        border: 2px solid $red;
+    }
+
+    &.pristine {
+        border: 1px solid $silver;
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+button {
+    width: 100%;
+    color: $white;
+    background-color: $blue;
+    border-color: $blueHover;
+
+    &:focus {
+        outline: none;
+    }
+
+    &.valid {
+        background-color: $green;
+        border-color: $green;
+    }
+
+    &.invalid {
+        background-color: $red;
+        border-color: $red;
+    }
+}
