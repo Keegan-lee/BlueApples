@@ -9,7 +9,6 @@
   "author": "Keegan Francis",
   "license": "ISC",
   "devDependencies": {
-    "angular-mocks": "^1.6.4",
     "chai": "^3.5.0",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
@@ -28,6 +27,7 @@
     "wiredep": "^4.0.0"
   },
   "dependencies": {
+    "angular-mocks": "^1.6.4",
     "express": "^4.15.3",
     "nodemailer": "^4.0.1"
   }

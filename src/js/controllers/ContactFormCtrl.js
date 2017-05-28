@@ -5,7 +5,7 @@ app.controller('ContactFormCtrl', function($scope, $http, $httpParamSerializer, 
     $scope.resultMessage;
     $scope.submitClicked = false;
     $scope.submitted = false; //used so that form errors are shown only after the form has been submitt
-    const TIMEOUT = 2000;
+    var TIMEOUT = 2000;
 
 	$scope.submit = function(e) {
 		$scope.submitClicked = true;
