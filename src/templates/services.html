@@ -18,7 +18,7 @@
 
 
             <uib-accordion id='servicesAccordion' close-other='oneAtAtime'>
-                <div uib-accordion-group ng-repeat='service in services track by $index' class="panel-default service container-fluid" heading="{{ service.title }}" is-open='$first'>
+                <div uib-accordion-group ng-repeat='service in services track by $index' class="panel-default container-fluid service content" heading="{{ service.title }}" is-open='$first'>
                     <div class='col-xs-12 col-sm-12 col-md-8 col-lg-8'>
                         <h3 class='title'>{{ service.name }}</h3>
                         <ul class='tags'>
@@ -27,7 +27,7 @@
                             </li>
                         </ul>
 
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 content" ng-if='service.content[0]'>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 section" ng-if='service.content[0]'>
                             <p ng-if='service.content[0].type == "text"'>{{ service.content[0].data }}</p>
                             <ul ng-if='service.content[0].type == "list"'>
                                 <il ng-repeat='item in service.content[0].data track by $index'>{{ item }}</il>
@@ -37,7 +37,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 img">
                         <img ng-src='{{ service.img.src }}' ng-alt='{{ service.img.alt }}'/>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 content" ng-repeat='section in service.content track by $index' ng-if='!$first'>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 section" ng-repeat='section in service.content track by $index' ng-if='!$first'>
                         <p ng-if='section.type == "text"'>{{ section.data }}</p>
 
 						<p ng-if='section.type == "quote"' class='quote'>"{{ section.data }}"</p>

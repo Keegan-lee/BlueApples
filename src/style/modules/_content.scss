@@ -1,0 +1,45 @@
+.content {
+    margin-bottom: 25px;
+    color: $black;
+    font-size: 1.20em;
+
+    .section {
+        margin-bottom: 10px;
+        div {
+            img {
+                width: 100%;
+            }
+        }
+
+        ul {
+            li {
+                display: list-item;
+            }
+        }
+
+        .quote {
+            padding: 25px 50px 25px 50px;
+            color: $blue;
+            font-size: 1.5em;
+        }
+
+        .textPhoto5050 {
+            p {
+                font-size: 1em;
+                font-weight: bold;
+            }
+            img {
+                width: 100%;
+            }
+        }
+    }
+}
+
+.sidePhotos {
+    div {
+        padding: 5px 0px 5px 0px;
+        img {
+            width: 100%;
+        }
+    }
+}

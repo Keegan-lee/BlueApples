@@ -14,3 +14,102 @@ $grey: #222222;
 $silver:#DDDDDD;
 $black:#111111;
 $white: #FFFFFF;
+
+
+h1, h2, h3, h4, h5, h6, p, a, li, span, {
+    &.green {
+        color: $green;
+    }
+
+    &.red {
+        color: $red;
+    }
+
+    &.yellow {
+        color: $yellow;
+    }
+
+    &.blue {
+        color: $blue;
+    }
+
+    &.grey {
+        color: $grey;
+    }
+
+    &.white {
+        color: $white;
+    }
+
+    &.black {
+        color: $black;
+    }
+}
+
+div {
+    &.green {
+        background-color: $green;
+    }
+
+    &.red {
+        background-color: $red;
+    }
+
+    &.yellow {
+        background-color: $yellow;
+    }
+
+    &.blue {
+        background-color: $blue;
+    }
+
+    &.grey {
+        background-color: $grey;
+    }
+
+    &.white {
+        background-color: $white;
+        color: $grey;
+    }
+
+    &.black {
+        background-color: $black;
+        color: $white;
+    }
+
+    &.silver {
+        background-color: $silver;
+        color: $black;
+    }
+}
+
+
+hr {
+    &.green {
+        border-color: $green;
+    }
+
+    &.red {
+        border-color: $red;
+    }
+
+    &.yellow {
+        border-color: $yellow;
+    }
+
+    &.blue {
+        border-color: $blue;
+    }
+
+    &.grey {
+        border-color: $grey;
+    }
+
+    &.white {
+        border-color: $white;
+    }
+
+    &.black {
+        border-color: $black;
+    }
+}

@@ -1,1 +1,36 @@
-<h1>About</h1>
+<div id='about' class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-init='init()'>
+    <div class='col-xs-12 col-sm-12 col-md-8 col-lg-8 content border-r-25 silver'>
+        <h2 class='centerText blue'>{{ title }}</h2>
+
+        <hr class='blue' />
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 section" ng-repeat='section in content track by $index'>
+            <p class='col-xs-12 col-sm-12 col-md-12 col-lg-12' ng-if='section.type == "text"'>{{ section.data }}</p>
+
+            <p class='col-xs-12 col-sm-12 col-md-12 col-lg-12 quote' ng-if='section.type == "quote"'>"{{ section.data }}"</p>
+
+            <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12' ng-if='section.type == "list"'>
+                <p class='listTitle'>{{ section.title }}</p>
+                <ul ng-if='section.type == "list"'>
+                    <li ng-repeat='item in section.data track by $index'>{{ item }}</li>
+                </ul>
+            </div>
+
+            <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 textPhoto5050 noPadding border-r-10' ng-if='section.type=="textPhoto5050"'  ng-class='section.class'>
+                <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6 m-top-50'>
+                    <p class='mediumText'>{{ section.data }}</p>
+                </div>
+
+                <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6 noPadding'>
+                    <img ng-src="{{ section.img.src }}" alt="{{ section.img.src }}">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class='col-xs-12 col-sm-12 col-md-4 col-lg-4 sidePhotos'>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-repeat='photo in sidePhotos' ng-if='photo'>
+            <img ng-src="{{ photo.src }}" ng-alt="{{ photo.alt }}" />
+        </div>
+    </div>
+</div>

@@ -7,7 +7,7 @@ $borderRadius: 30px;
         .service {
             margin: 0px 20px 25px 20px;
             padding:0;
-            border-radius: $borderRadius;            
+            border-radius: $borderRadius;
 
             .panel-heading {
                 background-color: $silver;
@@ -72,25 +72,7 @@ $borderRadius: 30px;
                         margin: 0 auto;
                         max-width: 100%;
                     }
-                }
-
-                .content {
-                    margin-bottom: 25px;
-                    color: $black;
-                    font-size: 1.25em;
-
-                    ul {
-                        li {
-                            display: list-item;
-                        }
-                    }
-
-                    .quote {
-                        padding: 25px 50px 0px 50px;
-                        color: $blue;
-                        font-size: 1.5em;
-                    }
-                }
+                }                
 
                 .contact {
                     background-color: $white;

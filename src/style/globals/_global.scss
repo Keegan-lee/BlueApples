@@ -7,49 +7,65 @@ $cubeSize: 60px;
 
 
 .centerText {
-    text-align: center;
+    text-align: center !important;
 }
 
 .tinyText {
-    font-size: .4em;
+    font-size: .4em !important;
 }
 
 .smallText {
-    font-size: .6em;
+    font-size: .6em !important;
 }
 
 .mediumText {
-    font-size: .8em;
+    font-size: .8em !important;
 }
 
 .largeText {
-    font-size: 1.4em;
+    font-size: 1.4em !important;
 }
 
 .hugeText {
-    font-size: 1.8em;
+    font-size: 1.8em !important;
 }
 
 .bold {
-    font-weight: bold;
+    font-weight: bold !important;
 }
 
 .m-top-10 {
-    margin-top: 10px;
+    margin-top: 10px !important;
 }
 
 .m-top-20 {
-    margin-top: 20px;
+    margin-top: 20px !important;
 }
 
 .m-top-25 {
-    margin-top: 25px;
+    margin-top: 25px !important;
 }
 
 .m-top-30 {
-    margin-top: 30px;
+    margin-top: 30px !important;
 }
 
 .m-top-50 {
-    margin-top: 50px;
+    margin-top: 50px !important;
+}
+
+.noPadding {
+    padding: 0 !important;
+}
+
+.border-r-10 {
+    border-radius: 10px !important;
+}
+
+.border-r-20 {
+    border-radius: 20px !important;
+}
+
+.border-r-25 {
+    border-radius: 25px !important;
 }
