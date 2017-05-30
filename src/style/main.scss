@@ -10,6 +10,7 @@
 @import 'modules/_loadingScreen';
 @import 'modules/_loading';
 @import 'modules/_content';
+@import 'modules/_footer';
 
 @import 'pages/_home';
 @import 'pages/_services';
@@ -44,9 +45,11 @@ body {
     background-size: cover;
 
     #view {
-        height: 100%;
         margin-top: $topViewMargin;
         margin-bottom: $bottomViewMargin;
+    }
+
+    #view, #footer {
         &.menuOpen {
             width: calc(100% - #{$menuWidth});
             margin-left: $menuWidth;

@@ -30,7 +30,7 @@ var srcPaths = {
 	html: './src/templates/**/*.html',
 	php: './src/**/*.php',
 	favicon: './src/favicon.ico',
-	htaccess: './src/.htaccess',
+	htaccess: './.htaccess',
 	shop: './src/shop/**/*.*',
 	data: './src/data/**/*.*',
 	bower: './bower_components/**/*.*'

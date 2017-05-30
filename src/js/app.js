@@ -106,9 +106,5 @@ var app = angular.module('app', ['ui.router', 'ui.bootstrap'])
 
         $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
 
-        });
-
-        angular.element(document).ready(function() {
-    		window.loadingScreen.finish();
-    	});
+        });        
     }]);

@@ -1,0 +1,16 @@
+<div class="background"></div>
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 footerItem">
+    <h1>Item A</h1>
+</div>
+
+<div id='socialMediaIcons' class="col-xs-12 col-sm-12 col-md-4 col-lg-4 footerItem">
+    <div class="socialMediaIcon" ng-repeat='(social, data) in socialMedia'>
+        <a href="{{ data.main }}" target='_blank'/>
+            <img ng-src="{{ data.icon.src }}" alt="{{ data.icon.alt }}" />
+        </a>
+    </div>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 footerItem">
+    <h1>Item A</h1>
+</div>

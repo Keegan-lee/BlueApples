@@ -4,6 +4,8 @@ app.controller('MainCtrl', function($scope, $state, $rootScope, $q, authService,
     $scope.helloWorld = "Hello World";
     $scope.title = "Blue Apples";
 
+    var SOCIAL_MEDIA_REF = "/globals/socialMedia/";
+
     $scope.routes;
 
     $rootScope.textRegex = /^[A-z\'\- ]+$/;
@@ -25,6 +27,15 @@ app.controller('MainCtrl', function($scope, $state, $rootScope, $q, authService,
         $q.when((fbApp = firebase.initializeApp(config))).then(function(response) {
 
     		$q.all(authService.init(fbApp), databaseService.init(fbApp), storageService.init(fbApp)).then(function(response) {
+
+                angular.element(document).ready(function() {
+            		window.loadingScreen.finish();
+            	});
+
+                $q.when(databaseService.getRef(SOCIAL_MEDIA_REF)).then(function(response) {
+                    $rootScope.socialMedia = response;
+                    console.log($rootScope.socialMedia);
+                });
 
     			// $window.onbeforeunload = function(evt) {
     			// 	authService.logout();
@@ -57,5 +68,13 @@ app.controller('MainCtrl', function($scope, $state, $rootScope, $q, authService,
 
     $scope.test = function() {
         return 1;
+    }
+
+    $scope.login = function() {
+
+    }
+
+    $scope.logout = function() {
+
     }
 });
