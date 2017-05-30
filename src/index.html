@@ -30,6 +30,11 @@
 
 </head>
 <body class='container-fluid'>
+
+	<div id='navToggle' ng-click='toggleNav()'>
+		<img src="/img/logo.png" alt="Blue Apples Menu Toggle" />
+	</div>
+
 	<!-- loadingScreen -->
 	<script	type='text/javascript' src='../bower_components/please-wait/build/please-wait.js'></script>
 	<!-- endLoadingScreen -->
@@ -40,7 +45,7 @@
 			loadingHtml: "<div class='sk-cube-grid'><div class='sk-cube sk-cube1'></div><div class='sk-cube sk-cube2'></div><div class='sk-cube sk-cube3'></div><div class='sk-cube sk-cube4'></div><div class='sk-cube sk-cube5'></div><div class='sk-cube sk-cube6'></div><div class='sk-cube sk-cube7'></div><div class='sk-cube sk-cube8'></div><div class='sk-cube sk-cube9'></div></div>"
 		});
 	</script>
-	<nav class='navbar navbar-default navbar-fixed-top navbar-inverse'>
+	<nav class='navbar navbar-default navbar-fixed-top navbar-inverse' uib-collapse='!navbarOpen'>
 		<div class='container-fluid'>
 			<div class='navbar-header'>
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mobileNavbar">
@@ -64,9 +69,9 @@
 		</div>
 	</nav>
 
-	<div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 menuOpen' id='view' ui-view></div>
+	<div class='col-xs-12 col-sm-12 col-md-12 col-lg-12' ng-class='{ navbarOpen : navbarOpen, navbarClosed: !navbarOpen }' id='view' ui-view></div>
 
-	<div id='footer' class='col-xs-12 col-xs-12 col-md-12 col-lg-12 menuOpen' ng-include="'/templates/footer.html'"></div>
+	<div id='footer' class='col-xs-12 col-xs-12 col-md-12 col-lg-12' ng-class='{ navbarOpen : navbarOpen, navbarClosed: !navbarOpen }' ng-include="'/templates/footer.html'"></div>
 
 	<script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
 

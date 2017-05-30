@@ -1,12 +1,14 @@
 'use strict';
 
 app.controller('MainCtrl', function($scope, $state, $rootScope, $q, authService, storageService, databaseService, $location) {
-    $scope.helloWorld = "Hello World";
+
     $scope.title = "Blue Apples";
 
     var SOCIAL_MEDIA_REF = "/globals/socialMedia/";
 
     $scope.routes;
+
+    $rootScope.navbarOpen = true;
 
     $rootScope.textRegex = /^[A-z\'\- ]+$/;
     $rootScope.emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -76,5 +78,9 @@ app.controller('MainCtrl', function($scope, $state, $rootScope, $q, authService,
 
     $scope.logout = function() {
 
+    }
+
+    $rootScope.toggleNav = function() {
+        $rootScope.navbarOpen = !$rootScope.navbarOpen;
     }
 });
