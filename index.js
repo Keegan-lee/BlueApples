@@ -1,5 +1,6 @@
 'use strict';
 
+require('dotenv').config();
 var express = require('express');
 var nodemailer = require('nodemailer');
 var app = express();
@@ -11,8 +12,8 @@ var transporter = nodemailer.createTransport({
     service: 'Gmail',
     host: 'smtp.gmail.com',
     auth: {
-        user: 'keegan.lee.francis@gmail.com',
-        pass: 'P14n0M4n'
+        user: process.env.EMAIL,
+        pass: process.env.PASS
     }
 });
 
