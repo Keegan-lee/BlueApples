@@ -45,7 +45,7 @@
 			loadingHtml: "<div class='sk-cube-grid'><div class='sk-cube sk-cube1'></div><div class='sk-cube sk-cube2'></div><div class='sk-cube sk-cube3'></div><div class='sk-cube sk-cube4'></div><div class='sk-cube sk-cube5'></div><div class='sk-cube sk-cube6'></div><div class='sk-cube sk-cube7'></div><div class='sk-cube sk-cube8'></div><div class='sk-cube sk-cube9'></div></div>"
 		});
 	</script>
-	<nav class='navbar navbar-default navbar-fixed-top navbar-inverse' uib-collapse='!navbarOpen'>
+	<nav class='navbar navbar-default navbar-fixed-top navbar-inverse' ng-class='{ navbarOpen: navbarOpen, navbarClosed: !navbarOpen }'>
 		<div class='container-fluid'>
 			<div class='navbar-header'>
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mobileNavbar">
@@ -58,20 +58,25 @@
 
 			<div class='collapse navbar-collapse'>
 				<ul class="nav navbar-nav">
-					<li ng-repeat='r in routes track by $index'>
-						<a ng-if='$index == 2' target='_blank' href="https://www.facebook.com/BlueApplesNaturals/events/">Events</a>
-						<a data-toggle="collapse" data-target="#mobileNavbar" ng-class='{ active: isActive(r.url, 1)}' ui-sref="{{ r.route }}">
-							{{ r.name }}
-						</a>
-					</li>
+					<nav-routes></nav-routes>
 			    </ul>
 			</div>
 		</div>
 	</nav>
 
-	<div class='col-xs-12 col-sm-12 col-md-12 col-lg-12' ng-class='{ navbarOpen : navbarOpen, navbarClosed: !navbarOpen }' id='view' ui-view></div>
+	<div class='col-xs-12 col-sm-12 col-md-12 col-lg-12' ng-class='{ navbarOpen : navbarOpen, navbarClosed: !navbarOpen, pageLoading: pageLoading }' id='view' ui-view></div>
+	<div id='pageLoadingScreen' class='col-xs-12 col-sm-12 col-md-12 col-lg-12' ng-class='{ navbarOpen : navbarOpen, navbarClosed: !navbarOpen, pageLoading: pageLoading }'>
 
-	<div id='footer' class='col-xs-12 col-xs-12 col-md-12 col-lg-12' ng-class='{ navbarOpen : navbarOpen, navbarClosed: !navbarOpen }' ng-include="'/templates/footer.html'"></div>
+		<div class="loading">			
+			<div class="loading-bar"></div>
+			<div class="loading-bar"></div>
+			<div class="loading-bar"></div>
+			<div class="loading-bar"></div>
+			<p class='loadingText'>Loading</p>
+		</div>
+	</div>
+
+	<div id='footer' class='col-xs-12 col-xs-12 col-md-12 col-lg-12' ng-class='{ navbarOpen : navbarOpen, navbarClosed: !navbarOpen, pageLoading: pageLoading }' ng-include="'/templates/footer.html'"></div>
 
 	<script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
 

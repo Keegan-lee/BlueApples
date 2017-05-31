@@ -14,6 +14,7 @@ app.controller('HomeCtrl', function($scope, databaseService, $q) {
 
             $scope.randomPhoto = Math.floor((Math.random() * $scope.content.img1.length));
             if ($scope.randomPhoto == -1) $scope.randomPhoto = 0;
+            $scope.$emit('pageLoaded');
         });
     };
 

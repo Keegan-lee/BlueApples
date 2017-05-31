@@ -1,16 +1,15 @@
 #footer {
-
     border-top: 2px solid $silver;
-    height: $footerHeight;
     z-index: 2;
     position: relative;
     padding:0;
+    display: flex;
 
     .background {
         position: absolute;
         background-color: $black;
         opacity: $footerOpactiy;
-        height: $footerHeight;
+        height: 100%;
         width: 100%;
     }
 
@@ -23,7 +22,6 @@
 
     #socialMediaIcons {
         display: flex;
-        height: $footerHeight;
         align-items: center;
         .socialMediaIcon {
             flex: 1;
@@ -31,6 +29,21 @@
             text-align: center;
             &:hover {
                 opacity: .8;
+            }
+        }
+    }
+
+    #footerNavigation {
+        h5 {
+            font-size: 1.2em;
+            color: $white;
+            text-align: center;
+            margin: 10px 0px 10px 0px;
+        }
+
+        ul {
+            .routes {
+                font-size: 1em;
             }
         }
     }

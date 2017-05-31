@@ -1,0 +1,6 @@
+<li class='routes' ng-repeat='r in routes track by $index'>
+    <a ng-if='$index == 2' target='_blank' href="https://www.facebook.com/BlueApplesNaturals/events/">Events</a>
+    <a data-toggle="collapse" data-target="#mobileNavbar" ui-sref="{{ r.route }}" ng-class='{ active: isActive(r.url, 1)}'>
+        {{ r.name }}
+    </a>
+</li>

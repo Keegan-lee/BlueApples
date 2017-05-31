@@ -5,17 +5,21 @@
 @import 'globals/_fonts';
 @import 'globals/_forms';
 
+@import 'mixins/_transitions';
+
 @import 'modules/_hoverEffect';
 @import 'modules/_navigation';
 @import 'modules/_loadingScreen';
 @import 'modules/_loading';
 @import 'modules/_content';
-@import 'modules/_footer';
 
-@import 'pages/_home';
-@import 'pages/_services';
-@import 'pages/_contact';
-@import 'pages/_about';
+@import 'directives/_routes';
+
+@import 'templates/_home';
+@import 'templates/_services';
+@import 'templates/_contact';
+@import 'templates/_about';
+@import 'templates/_footer';
 
 @import 'forms/_contactForm';
 
@@ -50,16 +54,61 @@ body {
         margin-bottom: $bottomViewMargin;
     }
 
-    #view, #footer {
+    #view, #footer, #pageLoadingScreen {
         transition: all .2s ease-in-out;
+
+        &.pageLoading {
+            display: none;
+        }
+
         &.navbarOpen {
             width: calc(100% - #{$menuWidth});
             margin-left: $menuWidth;
+            @include all-transition(1s);
         }
 
         &.navbarClosed {
             width: 100%;
             margin-left: 0;
+            @include all-transition(1s);
+        }
+    }
+
+    #pageLoadingScreen {
+        display: none;
+
+        transition: display 1s ease;
+
+        &.pageLoading {
+            display: flex;
+            align-items: center;
+            padding:0;
+            height: 100%;
+            top:0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+
+            .loading {
+                flex-grow: 1;
+
+                .loadingText {
+                    margin-top: 25px;
+                    color: $white;
+                }
+            }
+
+            @keyframes loading {
+              0% {
+                transform: scale(1.5);
+              }
+              20% {
+                transform: scale(1.5, 3.3);
+              }
+              40% {
+                transform: scale(1.5);
+              }
+            }
         }
     }
 }

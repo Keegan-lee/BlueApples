@@ -1,8 +1,7 @@
 
-$menuWidth: 20%;
+$menuWidth: 250px;
 
 nav {
-    transition: all .2s ease-in-out;
     width: $menuWidth;
     height: 100%;
     border-right: 5px solid $black !important;
@@ -15,24 +14,6 @@ nav {
 
     .navbar-nav {
         width: 100%;
-
-        li {
-            width: 100%;
-            text-align: center;
-            font-size: 2rem;
-
-            a {
-                margin:0px 5px 0px 5px;
-                padding: 10px 0px 10px 0px;
-            }
-
-            .active {
-                border-right: 5px solid $blue;
-                border-left: 5px solid $blue;
-                padding-right: 20px;
-                padding-left: 20px;
-            }
-        }
     }
 
     #brandIcon {
@@ -45,6 +26,17 @@ nav {
         margin: 0 auto;
         padding:20px;
     }
+
+    &.navbarOpen {
+        transform: translate3d(0, 0, 0);
+		animation-timing-function: 1s ease-in;
+        @include all-transition(1s);
+    }
+
+    &.navbarClosed {
+        transform: translate3d(-250px, 0, 0);
+        @include all-transition(1s);
+    }
 }
 
 #navToggle {
@@ -54,7 +46,6 @@ nav {
     top: 50px;
     right:25px;
     z-index: 2;
-    transition: all .2s ease-in-out;
 
     &:hover {
         cursor: pointer;

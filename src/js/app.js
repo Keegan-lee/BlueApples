@@ -94,17 +94,9 @@ var app = angular.module('app', ['ui.router', 'ui.bootstrap'])
             });
     })
 
-    .run(['$rootScope', '$state', function($rootScope, $state) {
+    .run(function($rootScope, $state, $transitions) {
 
-        $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-
-        });
-
-        $rootScope.$on('$stateChangeSuccess', function(event, toState) {
-
-        });
-
-        $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
-
-        });        
-    }]);
+        $transitions.onStart({}, function($transitions$) {
+            $rootScope.pageLoading = true;
+        })
+    });

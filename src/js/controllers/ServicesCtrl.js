@@ -8,6 +8,7 @@ app.controller('ServicesCtrl', function($scope, $q, databaseService) {
     $scope.init = function() {
         $q.when(databaseService.getRef(SERVICES_REF)).then(function(response) {
             $scope.services = response;
+            $scope.$emit('pageLoaded');
         });
 
         $scope.status = {

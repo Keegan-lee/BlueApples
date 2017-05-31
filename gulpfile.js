@@ -24,7 +24,8 @@ var srcPaths = {
 	components: './src/components/**/*.js',
 	style: {
 		main: './src/style/main.{scss, sass}',
-		all: './src/style/**/*.{scss, sass}'
+		all: './src/style/**/*.{scss, sass}',
+		misc: './src/style/**/*.css'
 	},
 	img: './src/img/**/*.*',
 	html: './src/templates/**/*.html',
@@ -80,6 +81,9 @@ gulp.task('data', function() {
 
 
 gulp.task('style', function() {
+	gulp.src(srcPaths.style.misc)
+		.pipe(gulp.dest(destPaths.style.folder));
+
 	return gulp.src(srcPaths.style.main)
 		.pipe(sass())
 		.pipe(gulp.dest(destPaths.style.folder));

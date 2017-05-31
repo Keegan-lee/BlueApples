@@ -10,10 +10,11 @@ app.controller('AboutCtrl', function($scope, $q, databaseService) {
 
     $scope.init = function() {
         $q.when(databaseService.getRef(ABOUT_REF)).then(function(response) {
-            console.log(response);
             $scope.content = response.content;
             $scope.title = response.title;
             $scope.sidePhotos = response.sidePhotos;
-        })
+
+            $scope.$emit('pageLoaded');
+        });
     };
 });

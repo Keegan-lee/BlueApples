@@ -14,6 +14,8 @@ app.controller('MainCtrl', function($scope, $state, $rootScope, $q, authService,
     $rootScope.emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     $rootScope.required = true;
 
+    $rootScope.pageLoading = true;
+
     var config = {
       apiKey: "AIzaSyCpd6hy3789XuQGrKicinAQiAKqmWl1u-o",
       authDomain: "blue-apples-d0123.firebaseapp.com",
@@ -61,7 +63,7 @@ app.controller('MainCtrl', function($scope, $state, $rootScope, $q, authService,
 		}
     };
 
-    $scope.isActive = function(path) {
+    $rootScope.isActive = function(path) {
 		if (path == $location.path()) {
 			return true;
 		}
@@ -79,6 +81,10 @@ app.controller('MainCtrl', function($scope, $state, $rootScope, $q, authService,
     $scope.logout = function() {
 
     }
+
+    $scope.$on('pageLoaded', function(event) {
+        $rootScope.pageLoading = false;
+    });
 
     $rootScope.toggleNav = function() {
         $rootScope.navbarOpen = !$rootScope.navbarOpen;
