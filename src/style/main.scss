@@ -20,6 +20,7 @@
 @import 'templates/_contact';
 @import 'templates/_about';
 @import 'templates/_footer';
+@import 'templates/_veganRestaurant';
 
 @import 'forms/_contactForm';
 
@@ -52,6 +53,7 @@ body {
     #view {
         margin-top: $topViewMargin;
         margin-bottom: $bottomViewMargin;
+        height: 100%;
     }
 
     #view, #footer, #pageLoadingScreen {

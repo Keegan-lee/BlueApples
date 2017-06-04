@@ -1,0 +1,23 @@
+<div id='login' class='container-fluid' ng-init='init()'>
+	<form id='form' name='form' ng-submit='loginWithEmailAndPassword($event)' class='container-fluid' ng-if='!loggedIn'>
+		<div class='col-md-offset-3 col-md-6'>
+			<input name='email' ng-model='email' type='email' ng-pattern='emailRegex' ng-class="{ valid: form.email.$valid, invalid: form.email.$invalid, pristine: form.email.$pristine }" placeholder="email" autofocus required/>
+		</div>
+
+		<div class='col-md-offset-3 col-md-6 container'>
+			<input name='password' ng-model='password' type='password' placeholder="password" required />
+		</div>
+
+		<button type='submit' value='Submit' class='col-md-offset-3 col-md-6'>Log In</button>
+		<!-- <div id='loginWithGoogle' class='col-md-offset-3 col-md-6' ng-click='loginWithGoogle()'>Google</div> -->
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if='errorMessage'>
+            <p class='red'>{{ errorMessage }}</p>
+        </div>
+	</form>
+
+	<form id='logoutForm' class='container' ng-if='loggedIn'>
+		<div id='logoutButton' class='col-md-offset-3 col-md-6' ng-click='logout()'>
+			Log Out
+		</div>
+	</form>
+</div>

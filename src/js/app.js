@@ -72,7 +72,7 @@ var app = angular.module('app', ['ui.router', 'ui.bootstrap'])
                   	}
                 }
             })
-            .state('Vegan Restaurant', {
+            .state('VeganRestaurant', {
                 url: '/veganRestaurant',
                 templateUrl: 'templates/veganRestaurant.html',
                 controller: 'RestaurantCtrl',
@@ -90,6 +90,26 @@ var app = angular.module('app', ['ui.router', 'ui.bootstrap'])
                     title: 'Contact',
                     authenticate: false,
                     main: true
+                }
+            })
+            .state('login', {
+                url: '/login',
+                templateUrl: 'templates/login.html',
+                controller: 'LoginCtrl',
+                data: {
+                    title: 'Login',
+                    authenticate: false,
+                    main: false
+                }
+            })
+            .state('admin', {
+                url: '/admin',
+                templateUrl: 'templates/admin/admin.html',
+                controller: 'AdminCtrl',
+                data: {
+                    title: 'Admin',
+                    authenticate: true,
+                    main: false
                 }
             });
     })

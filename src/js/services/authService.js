@@ -24,12 +24,12 @@ app.service('authService', ['$q', '$rootScope', function($q, $rootScope) {
 
 	this.loginWithGoogle = function() {
 		fbApp.auth().signInWithPopup(googleProvider).then(function(result) {
-            
+
 		});
 	};
 
 	this.loginWithEmailAndPassword = function(email, password) {
-		if (fbApp.auth().currentUser) {
+		if (fbApp.auth().currentUser) {		
 			fbApp.auth().signOut();
 		} else {
 			return fbApp.auth().signInWithEmailAndPassword(email, password);
