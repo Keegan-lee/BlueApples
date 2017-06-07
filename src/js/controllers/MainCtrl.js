@@ -36,12 +36,7 @@ app.controller('MainCtrl', function($scope, $state, $rootScope, $q, authService,
 
                 $q.when(databaseService.getRef(SOCIAL_MEDIA_REF)).then(function(response) {
                     $rootScope.socialMedia = response;
-                    console.log($rootScope.socialMedia);
                 });
-
-    			// $window.onbeforeunload = function(evt) {
-    			// 	authService.logout();
-    			// };
     		});
     	});
         buildMenu();
@@ -70,14 +65,6 @@ app.controller('MainCtrl', function($scope, $state, $rootScope, $q, authService,
 
     $scope.test = function() {
         return 1;
-    }
-
-    $scope.login = function() {
-
-    }
-
-    $scope.logout = function() {
-
     }
 
     $scope.$on('pageLoaded', function(event) {

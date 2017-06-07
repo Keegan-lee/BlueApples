@@ -5,6 +5,7 @@ nav {
     width: $menuWidth;
     height: 100%;
     border-right: 5px solid $black !important;
+    overflow: scroll;
 
     .navbar-header {
         width: 100%;
@@ -53,5 +54,15 @@ nav {
 
     img {
         width: 100%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .navbar-header, .navbar-nav {
+        margin: 0 !important;
+    }
+
+    a {
+        font-size: 4vw !important;
     }
 }

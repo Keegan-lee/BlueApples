@@ -111,12 +111,37 @@ var app = angular.module('app', ['ui.router', 'ui.bootstrap'])
                     authenticate: true,
                     main: false
                 }
+            })
+            // .state('blog', {
+            //     url: '/blog/:blog/:post',
+            //     templateUrl: 'templates/blog.html',
+            //     controller: 'BlogCtrl',
+            //     data: {
+            //         title: 'Blog',
+            //         authenticate: false,
+            //         main: true
+            //     },
+            //     params: {
+            //         blog: null,
+            //         post: null
+            //     }
+            // })
+            .state('admin.blogEditor', {
+                url: '/blogEditor',
+                tempalteUrl: 'templates/admin/blogEditor.html',
+                controller: 'BlogEditorCtrl',
+                data: {
+                    title: 'Blog Editor',
+                    authenticate: true,
+                    main: false
+                }
             });
     })
 
     .run(function($rootScope, $state, $transitions) {
 
         $transitions.onStart({}, function($transitions$) {
+            console.log($transitions$);
             $rootScope.pageLoading = true;
         })
     });

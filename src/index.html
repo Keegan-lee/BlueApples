@@ -48,15 +48,10 @@
 	<nav class='navbar navbar-default navbar-fixed-top navbar-inverse' ng-class='{ navbarOpen: navbarOpen, navbarClosed: !navbarOpen }'>
 		<div class='container-fluid'>
 			<div class='navbar-header'>
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mobileNavbar">
-			        <span class="icon-bar"></span>
-			        <span class="icon-bar"></span>
-			        <span class="icon-bar"></span>
-			    </button>
 				<a id='brandIcon' class='navbar-brand' ui-sref='home'></a>
 			</div>
 
-			<div class='collapse navbar-collapse'>
+			<div>
 				<ul class="nav navbar-nav">
 					<nav-routes></nav-routes>
 			    </ul>
@@ -67,7 +62,7 @@
 	<div class='col-xs-12 col-sm-12 col-md-12 col-lg-12' ng-class='{ navbarOpen : navbarOpen, navbarClosed: !navbarOpen, pageLoading: pageLoading }' id='view' ui-view></div>
 	<div id='pageLoadingScreen' class='col-xs-12 col-sm-12 col-md-12 col-lg-12' ng-class='{ navbarOpen : navbarOpen, navbarClosed: !navbarOpen, pageLoading: pageLoading }'>
 
-		<div class="loading">			
+		<div class="loading">
 			<div class="loading-bar"></div>
 			<div class="loading-bar"></div>
 			<div class="loading-bar"></div>

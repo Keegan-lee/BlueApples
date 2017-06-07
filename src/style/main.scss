@@ -21,6 +21,7 @@
 @import 'templates/_about';
 @import 'templates/_footer';
 @import 'templates/_veganRestaurant';
+@import 'templates/_blog';
 
 @import 'forms/_contactForm';
 
@@ -35,6 +36,7 @@ h1, h2, h3, h4 {
 
 p, a, h5, h6, li, input, textarea {
     font-family: 'Source Sans Pro';
+    font-size: 1.5vw;
 }
 
 hr {
@@ -53,7 +55,6 @@ body {
     #view {
         margin-top: $topViewMargin;
         margin-bottom: $bottomViewMargin;
-        height: 100%;
     }
 
     #view, #footer, #pageLoadingScreen {
@@ -112,5 +113,27 @@ body {
               }
             }
         }
+    }
+}
+
+
+@media only screen and (max-width: 768px) {
+    #view, #footer, #pageLoadingScreen {
+        &.navbarOpen {
+            width: 100% !important;
+            margin-left: 0 !important;
+        }
+    }
+
+    #footer {
+        display: block;
+    }
+
+    body {
+        background-size: contain !important;
+    }
+
+    p, h5, h6, li, input, textarea {
+        font-size: 3vw;
     }
 }
