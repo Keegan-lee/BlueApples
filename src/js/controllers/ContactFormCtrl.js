@@ -10,11 +10,11 @@ app.controller('ContactFormCtrl', function($scope, $http, $httpParamSerializer, 
 	$scope.submit = function(e) {
 		$scope.submitClicked = true;
 
-        $scope.form.recipient = "keegan.lee.francis@gmail.com";
+        $scope.form.recipient = "daniel@blue-apples.org";
 
         $scope.formData = {
             name: $scope.form.name.$viewValue,
-            recipient: "keegan.lee.francis@gmail.com",
+            recipient: "daniel@blue-apples.org",
             subject: $scope.form.subject.$viewValue,
             email: $scope.form.email.$viewValue,
             message: $scope.form.message.$viewValue
@@ -23,7 +23,7 @@ app.controller('ContactFormCtrl', function($scope, $http, $httpParamSerializer, 
         if ($scope.form.$valid) {
             $http({
                 method  : 'POST',
-                url     : 'http://localhost:80/send',
+                url     : 'http://blue-apples.org:80/send',
                 params  : $scope.formData,  //param method from jQuery
                 dataType: 'json',
                 headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  //set the headers so angular passing info as form data (not request payload)

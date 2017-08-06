@@ -20,6 +20,15 @@
         }
     }
 
+    #comingSoon {
+        color: $silver;
+        text-align: center;
+        ul {
+            padding: 0;
+            list-style: none;
+        }
+    }
+
     #socialMediaIcons {
         display: flex;
         align-items: center;

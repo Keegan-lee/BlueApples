@@ -53,22 +53,21 @@
                     <hr/>
 
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 contact">
-                        <a class='col-xs-2 col-sm-2 col-md-2 col-lg-2' href="tel:{{ service.contact.phone }}" ng-if='service.contact.phone' >
+                        <a class='col-xs-2 col-sm-2 col-md-2 col-lg-2 item' href="tel:{{ service.contact.phone }}" ng-if='service.contact.phone' >
                             <i class='fa fa-phone'></i>
                                 <!-- <span class='smallText bold'>{{ service.contact.phone }}</span> -->
-
                         </a>
 
-                        <a class='col-xs-2 col-sm-2 col-md-2 col-lg-2' href='mailto:{{ service.contact.email }}' ng-if='service.contact.email'>
+                        <a class='col-xs-2 col-sm-2 col-md-2 col-lg-2 item' href='mailto:{{ service.contact.email }}' ng-if='service.contact.email'>
                             <i class='fa fa-envelope'></i>
                             <!-- <span class='smallText bold'>{{ service.contact.email }}</span> -->
                         </a>
 
-                        <a class='col-xs-2 col-sm-2 col-md-2 col-lg-2' href="{{ service.contact.book }}" ng-if='service.contact.book'>
+                        <a class='col-xs-2 col-sm-2 col-md-2 col-lg-2 item' href="{{ service.contact.book }}" ng-if='service.contact.book'>
                             <i class='fa fa-calendar'></i>
                         </a>
 
-						<a class='col-xs-2 col-sm-2 col-md-2 col-lg-2' href="{{ service.contact.facebook }}" ng-if='service.contact.facebook'>
+						<a class='col-xs-2 col-sm-2 col-md-2 col-lg-2 item' href="{{ service.contact.facebook }}" ng-if='service.contact.facebook'>
 							<i class="fa fa-facebook"></i>
 						</a>
                     </div>

@@ -3,8 +3,6 @@
 
 	<div class='row'>
 		<div class='col-xs-12 col-sm-12 col-md-6 col-lg-6 container'>
-			<h2 class='col-md-12'>New Location!</h2>
-
             <div ui-sref='{{ m.link }}' class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container menuItem" ng-repeat='m in menu track by $index'>
                 <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 container">
                     <h5>{{ m.lineOne }}</h5>
@@ -22,7 +20,7 @@
 				<img class='img-responsive' ng-src="{{ content.img1[randomPhoto].src }}" ng-alt='{{ content.img1[randomPhoto].alt }}'>
 				<div class='overlay'>
 					<h2>{{ content.img1[randomPhoto].title }}</h2>
-					<p><a ui-sref='content.img1[randomPhoto].link'>{{ content.img1[randomPhoto].linkText }}</a></p>
+					<p><a ui-sref='{{ content.img1[randomPhoto].link }}'>{{ content.img1[randomPhoto].linkText }}</a></p>
 				</div>
 			</div>
 		</div>

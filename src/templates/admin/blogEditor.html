@@ -1,0 +1,423 @@
+<div id='blogEditor' class='container-fluid' ng-init='init()'>
+	<div class='row' id='editorPanel'>
+		<ul class='menuStyleA'>
+			<li id='back' ng-click='disablePostView()' ng-class='{ disabled : !postView }'>Back</li>
+			<li ng-repeat='blog in blogs track by $index' ng-click="selectBlog($index)" ng-class="{ active : isActive(blog)}">{{ blog.title }}</li>
+		</ul>
+
+		<div class='col-md-12 customCollapse'>
+			<div class='collapseIcon' ng-class='{ collapsed : menuCollapse }' ng-click='toggleMenuCollapse()'></div>
+		</div>
+		<div id='editorTools' class='col-md-12 container' uib-collapse='menuCollapse' ng-if='toggleMenuCollapse'>
+			<div id='blogFunctions' class='col-md-6 container'>
+				<div class='row'>
+					<h3 class='title col-md-offset-4 col-md-4'>Blog</h3>
+					<h6 ng-if='blogSaved' class='col-md-4 save' ng-class="{ green : blogSaved }">Saved</h3>
+					<h6 ng-if='!blogSaved' class='col-md-4 save' ng-class='{ red : !blogSaved }'>Not Saved</h3>
+				</div>
+
+				<div class='row'>
+					<div id='newBlog' class='btn-primary col-md-4' ng-class='{ disabled : postView }' ng-click='newBlog()'>New</div>
+					<div id='deleteBlog' class='btn-danger col-md-4' ng-class='{ disabled : currentBlog == -1 || postView }' ng-click='deleteBlog()'>Delete</div>
+					<div id='saveBlog' class='btn-success col-md-4' ng-class='{ disabled : currentBlog == -1 }' ng-click='saveBlog()'>Save</div>
+				</div> <!-- row -->
+
+				<hr />
+
+				<div class='row' id='defaultBlogPhotoUpload'>
+					<div class='col-md-8 container-fluid'>
+						<h4 class='col-md-12'>Default Blog Photo</h4>
+					</div>
+
+					<div ng-if='currentBlogDefaultPhoto' class='col-md-4 photo' ngf-select="uploadDefaultBlogPhoto($file)" accept='image/*'>
+						<img ng-src="{{ currentBlogDefaultPhoto }}" />
+					</div>
+
+					<div ng-if='!currentBlogDefaultPhoto' class='col-md-4 noPhoto' ng-class="{ disabled : currentBlog == -1, 'btn-primary': currentBlog != -1 }" ng-disabled='currentBlog == -1' ngf-select="uploadDefaultBlogPhoto($file)" accept='image/*'>Upload Default Photo</div>
+				</div> <!-- row -->
+
+				<hr />
+			</div>
+
+
+			<div id='postFunctions' class='col-md-6 container'>
+				<div class='row'>
+					<h3 class='title col-md-offset-4 col-md-4'>Posts</h3>
+					<h6 ng-if='postSaved' class='col-md-4 save' ng-class="{ green : postSaved }">Saved</h3>
+					<h6 ng-if='!postSaved' class='col-md-4 save' ng-class='{ red : !postSaved }'>Not Saved</h3>
+				</div> <!-- row -->
+
+				<div class='row'>
+					<div id='newPost' ng-click='newPost()' class='col-md-4 btn-primary' ng-class='{ disabled : currentBlog == -1 }'>New</div>
+
+					<div id='deletePost' ng-click='deletePost()' class='col-md-4 btn-danger' ng-class='{ disabled : currentBlog == -1 }'>
+						Delete
+					</div>
+
+					<div id='savePost' ng-click='savePost()' class='col-md-4 btn-success' ng-class='{ disabled : !postView }'>
+						Save
+					</div>
+				</div> <!-- row -->
+
+				<hr />
+
+				<div class='row' id='postPhotoUpload'>
+					<div class='col-md-8 container-fluid'>
+						<h4 class='col-md-12'>Post Photo</h4>
+					</div>
+
+					<div ng-if='blogs[currentBlog].posts[currentPost].img.url' class='col-md-4 photo' ngf-select="uploadPostPhoto($file)" accept='image/*'>
+						<img ng-src="{{ blogs[currentBlog].posts[currentPost].img.url }}" />
+					</div>
+
+					<div ng-if='!blogs[currentBlog].posts[currentPost].img.url' class='col-md-4 noPhoto' ng-class="{ disabled : !postView, 'btn-primary' : postView }" ng-disabled='!postView' ngf-select="uploadPostPhoto($file)" accept='image/*'>
+						Upload Post Photo
+					</div>
+				</div> <!-- row -->
+
+				<hr />
+
+			</div>
+		</div>
+	</div> <!-- row -->
+
+
+	<div ng-if='!postView' class='row'>
+		<input id='blogTitle' ng-if='currentBlog != -1' class='col-md-12' ng-model='blogs[currentBlog].title' autofocus/>
+		<table id='blogPosts' class='col-md-12'>
+			<thead>
+				<th id='checkHeader'>Publish<input ng-click='publishAll()' ng-model='$parent.masterCheck' type="checkbox"></th>
+				<th ng-if='options.showIDs' id='idHeader'>ID</th>
+				<th>Title</th>
+				<th>Date</th>
+				<th id='deleteHeader'>Delete</th>
+			</thead>
+			<tr class='post' ng-repeat="post in blogs[currentBlog].posts | orderBy:'-' track by $index" ng-if='post'>
+				<td><input ng-change='blogChanged()' ng-model='post.published' type="checkbox"></td>
+				<td ng-if='options.showIDs' ng-click='selectPost(post.id)'>{{ post.id }}</td>
+				<td ng-click='selectPost(post.id)'>{{ post.title }}</td>
+				<td ng-click='selectPost(post.id)'>{{ post.date | date:'MMMM d, yyyy'}}</td>
+				<td class='deletePostX' ng-click='deletePost(post.id)'></td>
+			</tr>
+		</table>
+	</div> <!-- row -->
+
+
+	<div ng-if='postView' class='row'>
+		<div id='editPostPanel' class='col-md-12 container-fluid'>
+			<div id='titleRow'>
+				<input id='title' class='col-md-8' ng-model='blogs[currentBlog].posts[currentPost].title' autofocus />
+				<h5 id='date' class='col-md-4'>{{ blogs[currentBlog].posts[currentPost].date | date:'MMMM d, yyyy' }}</h5>
+			</div>
+
+			<div id='tagRow'>
+				<div id='tagContainer' class='container-fluid'>
+					<ul id='tags' class='col-md-8'>
+						<li class='tag' ng-class="{ selected : blogs[currentBlog].posts[currentPost].tags[$index].selected }" ng-repeat='tag in blogs[currentBlog].posts[currentPost].tags track by $index' ng-click='selectTag($index)'>
+							{{ tag }}
+							<span ng-if='tag' ng-show="!$last">,&nbsp</span>
+						</li>
+						<li class='tag'><input type="text" ng-model='$parent.newTag'/></li>
+					</ul>
+					<div id='addTag' class='col-md-2 btn-primary' ng-click='addTag()'>Add Tag</div>
+					<div id='deleteTags' class='col-md-2 btn-danger' ng-click='deleteTags()'>Delete Tags</div>
+
+					<h4 ng-if='tagSuccessMessage' class='col-md-12' id='tagSuccessMessage'>
+						{{ tagSuccessMessage }}
+					</h4>
+
+					<h4 ng-if='tagErrorMessage' class='col-md-12' id='tagErrorMessage'>
+						{{ tagErrorMessage }}
+					</h4>
+				</div> <!-- tagContainer -->
+			</div>
+
+			<div id='contentBlock' ng-if='blogs[currentBlog].posts[currentPost].isAlbum' class='col-md-8 container-fluid'>
+				<div class='contentSection container-fluid' ng-repeat='section in blogs[currentBlog].posts[currentPost].sections track by $index' ng-mouseover='sectionHover = true' ng-mouseleave='sectionHover = false'>
+					<div class='section' ng-if="section.type == 'A'">
+						<textarea ng-change='postChanged()' class='col-md-8' ng-model='section.text'></textarea>
+						<div class='container col-md-4' ng-if='section.photos[0]' ng-mouseover='photoHover = true' ng-mouseleave='photoHover = false'>
+							<img ng-class='{ rotate90 : section.photos[0].rotate == 1, rotate180 : section.photos[0].rotate == 2, rotate270 : section.photos[0].rotate == 3 }' ng-src='{{ section.photos[0].url }}' class='col-md-12'>
+							<div class='rotateBtn' ng-show='photoHover' ng-click='rotateRight(section.photos[0])'></div>
+						</div>
+						<div ng-if='!section.photos[0]' class='addPhotoBlock col-md-4 btn-primary' ngf-select="uploadSectionImage($files, section.id, 0)" accept='image/*'>
+							Add Photo
+						</div>
+					</div> <!-- A -->
+
+					<div class='section' ng-if="section.type == 'B'">
+						<div class='container col-md-8' ng-if='section.photos[0]' ng-mouseover='photoHover = true' ng-mouseleave='photoHover = false'>
+							<img ng-class='{ rotate90 : section.photos[0].rotate == 1, rotate180 : section.photos[0].rotate == 2, rotate270 : section.photos[0].rotate == 3 }' ng-src='{{ section.photos[0].url }}' class='col-md-12'>
+							<div class='rotateBtn' ng-show='photoHover' ng-click='rotateRight(section.photos[0])'></div>
+						</div>
+						<div ng-if='!section.photos[0]' class='addPhotoBlock col-md-8 btn-primary' ngf-select="uploadSectionImage($files, section.id, 0)" accept='image/*'>
+							Add Photo
+						</div>
+						<textarea ng-change='postChanged()' class='col-md-4' ng-model='section.text'></textarea>
+					</div> <!-- B -->
+
+					<div class='section' ng-if="section.type == 'C'">
+						<div class='container col-md-4' ng-if='section.photos[0]' ng-mouseover='photoHover = true' ng-mouseleave='photoHover = false'>
+							<img ng-class='{ rotate90 : section.photos[0].rotate == 1, rotate180 : section.photos[0].rotate == 2, rotate270 : section.photos[0].rotate == 3 }' ng-src='{{ section.photos[0].url }}' class='col-md-12'>
+							<div class='rotateBtn' ng-show='photoHover' ng-click='rotateRight(section.photos[0])'></div>
+						</div>
+						<div ng-if='!section.photos[0]' class='addPhotoBlock col-md-4 btn-primary' ngf-select="uploadSectionImage($files, section.id, 0)" accept='image/*'>
+							Add Photo
+						</div>
+						<textarea ng-change='postChanged()' class='col-md-4' ng-model='section.text'></textarea>
+						<div class='container col-md-4' ng-if='section.photos[1]' ng-mouseover='photoHover = true' ng-mouseleave='photoHover = false'>
+							<img ng-class='{ rotate90 : section.photos[1].rotate == 1, rotate180 : section.photos[1].rotate == 2, rotate270 : section.photos[1].rotate == 3 }' ng-src='{{ section.photos[1].url }}' class='col-md-12'>
+							<div class='rotateBtn' ng-show='photoHover' ng-click='rotateRight(section.photos[1])'></div>
+						</div>
+						<div ng-if='!section.photos[1]' class='addPhotoBlock col-md-4 btn-primary' ngf-select="uploadSectionImage($files, section.id, 1)" accept='image/*'>
+							Add Photo
+						</div>
+					</div> <!-- C -->
+
+					<div class='section' ng-if="section.type == 'D'">
+						<textarea ng-change='postChanged()' class='col-md-12' ng-model='section.text'></textarea>
+					</div> <!-- D -->
+
+					<div class='section' ng-if="section.type == 'E'">
+						<div class='container col-md-6' ng-if='section.photos[0]' ng-mouseover='photoHover = true' ng-mouseleave='photoHover = false'>
+							<img ng-class='{ rotate90 : section.photos[0].rotate == 1, rotate180 : section.photos[0].rotate == 2, rotate270 : section.photos[0].rotate == 3 }' ng-src='{{ section.photos[0].url }}' class='col-md-12'>
+							<div class='rotateBtn' ng-show='photoHover' ng-click='rotateRight(section.photos[0])'></div>
+						</div>
+						<div ng-if='!section.photos[0]' class='addPhotoBlock col-md-6 btn-primary' ngf-select="uploadSectionImage($files, section.id, 0)" accept='image/*'>
+							Add Photo
+						</div>
+						<textarea ng-change='postChanged()' class='col-md-6' ng-model='section.text'></textarea>
+					</div> <!-- E -->
+
+
+					<div class='section' ng-if="section.type == 'F'">
+						<div class='container col-md-6' ng-if='section.photos[0]' ng-mouseover='photoHover = true' ng-mouseleave='photoHover = false'>
+							<img ng-class='{ rotate90 : section.photos[0].rotate == 1, rotate180 : section.photos[0].rotate == 2, rotate270 : section.photos[0].rotate == 3 }' ng-src='{{ section.photos[0].url }}' class='col-md-12'>
+							<div class='rotateBtn' ng-show='photoHover' ng-click='rotateRight(section.photos[0])'></div>
+						</div>
+						<div ng-if='!section.photos[0]' class='addPhotoBlock col-md-6 btn-primary' ngf-select="uploadSectionImage($files, section.id, 0)" accept='image/*'>
+							Add Photo
+						</div>
+
+						<div class='container col-md-6' ng-if='section.photos[1]' ng-mouseover='photoHover = true' ng-mouseleave='photoHover = false'>
+							<img ng-class='{ rotate90 : section.photos[1].rotate == 1, rotate180 : section.photos[1].rotate == 2, rotate270 : section.photos[1].rotate == 3 }' ng-src='{{ section.photos[1].url }}' class='col-md-12'>
+							<div class='rotateBtn' ng-show='photoHover' ng-click='rotateRight(section.photos[1])'></div>
+						</div>
+						<div ng-if='!section.photos[1]' class='addPhotoBlock col-md-6 btn-primary' ngf-select="uploadSectionImage($files, section.id, 1)" accept='image/*'>
+							Add Photo
+						</div>
+					</div> <!-- F -->
+
+					<div class='section' ng-if="section.type == 'G'">
+						<textarea ng-change='postChanged()' class='col-md-6' ng-model='section.text[0]'></textarea>
+						<textarea ng-change='postChanged()' class='col-md-6' ng-model='section.text[1]'></textarea>
+					</div> <!-- G -->
+
+					<div class='section' ng-if="section.type == 'H'">
+						<textarea ng-change='postChanged()' class='col-md-6' ng-model='section.text'></textarea>
+						<div class='container col-md-6' ng-if='section.photos[0]' ng-mouseover='photoHover = true' ng-mouseleave='photoHover = false'>
+							<img ng-class='{ rotate90 : section.photos[0].rotate == 1, rotate180 : section.photos[0].rotate == 2, rotate270 : section.photos[0].rotate == 3 }' ng-src='{{ section.photos[0].url }}' class='col-md-12'>
+							<div class='rotateBtn' ng-show='photoHover' ng-click='rotateRight(section.photos[0])'></div>
+						</div>
+						<div ng-if='!section.photos[0]' class='addPhotoBlock col-md-6 btn-primary' ngf-select="uploadSectionImage($files, section.id, 0)" accept='image/*'>
+							Add Photo
+						</div>
+					</div> <!-- H -->
+
+					<div ng-show='sectionHover' class='deleteSection' ng-click='deleteSection(section.id)'></div>
+				</div>
+
+				<div id='sectionEditPanel' class='container-fluid'>
+					<div id='newSectionButton' ng-click='$parent.$parent.newSectionPopup = true' class='col-md-8 btn-primary'>New Section</div>
+					<label class='col-md-2'>Album</label>
+					<input class='col-md-2' type="checkbox" ng-model='blogs[currentBlog].posts[currentPost].isAlbum' />
+				</div>
+			</div>
+
+			<div id='contentBlock' ng-if='!blogs[currentBlog].posts[currentPost].isAlbum' class='col-md-12 container-fluid'>
+				<div class='contentSection container-fluid' ng-repeat='section in blogs[currentBlog].posts[currentPost].sections track by $index' ng-mouseover='sectionHover = true' ng-mouseleave='sectionHover = false'>
+					<div class='section' ng-if="section.type == 'A'">
+						<textarea ng-change='postChanged()' class='col-md-8' ng-model='section.text'></textarea>
+
+						<div class='container col-md-4' ng-if='section.photos[0]' ng-mouseover='photoHover = true' ng-mouseleave='photoHover = false'>
+							<img ng-class='{ rotate90 : section.photos[0].rotate == 1, rotate180 : section.photos[0].rotate == 2, rotate270 : section.photos[0].rotate == 3 }' ng-src='{{ section.photos[0].url }}' class='col-md-12'>
+							<div class='rotateBtn' ng-show='photoHover' ng-click='rotateRight(section.photos[0])'></div>
+						</div>
+
+						<div ng-if='!section.photos[0]' class='addPhotoBlock col-md-4 btn-primary' ngf-select="uploadSectionImage($files, section.id, 0)" accept='image/*'>
+							Add Photo
+						</div>
+					</div> <!-- A -->
+
+					<div class='section' ng-if="section.type == 'B'">
+						<div class='container col-md-8' ng-if='section.photos[0]' ng-mouseover='photoHover = true' ng-mouseleave='photoHover = false'>
+							<img ng-class='{ rotate90 : section.photos[0].rotate == 1, rotate180 : section.photos[0].rotate == 2, rotate270 : section.photos[0].rotate == 3 }' ng-src='{{ section.photos[0].url }}' class='col-md-12'>
+							<div class='rotateBtn' ng-show='photoHover' ng-click='rotateRight(section.photos[0])'></div>
+						</div>
+						<div ng-if='!section.photos[0]' class='addPhotoBlock col-md-8 btn-primary' ngf-select="uploadSectionImage($files, section.id, 0)" accept='image/*'>
+							Add Photo
+						</div>
+						<textarea ng-change='postChanged()' class='col-md-4' ng-model='section.text'></textarea>
+					</div> <!-- B -->
+
+					<div class='section' ng-if="section.type == 'C'">
+						<div class='container col-md-4' ng-if='section.photos[0]' ng-mouseover='photoHover = true' ng-mouseleave='photoHover = false'>
+							<img ng-class='{ rotate90 : section.photos[0].rotate == 1, rotate180 : section.photos[0].rotate == 2, rotate270 : section.photos[0].rotate == 3 }' ng-src='{{ section.photos[0].url }}' class='col-md-12'>
+							<div class='rotateBtn' ng-show='photoHover' ng-click='rotateRight(section.photos[0])'></div>
+						</div>
+
+						<div ng-if='!section.photos[0].url' class='addPhotoBlock col-md-4 btn-primary' ngf-select="uploadSectionImage($files, section.id, 0)" accept='image/*'>
+							Add Photo
+						</div>
+						<textarea ng-change='postChanged()' class='col-md-4' ng-model='section.text'></textarea>
+						<div class='container col-md-4' ng-if='section.photos[1]' ng-mouseover='photoHover = true' ng-mouseleave='photoHover = false'>
+							<img ng-class='{ rotate90 : section.photos[1].rotate == 1, rotate180 : section.photos[1].rotate == 2, rotate270 : section.photos[1].rotate == 3 }' ng-src='{{ section.photos[1].url }}' class='col-md-12'>
+							<div class='rotateBtn' ng-show='photoHover' ng-click='rotateRight(section.photos[1])'></div>
+						</div>
+						<div ng-if='!section.photos[1].url' class='addPhotoBlock col-md-4 btn-primary' ngf-select="uploadSectionImage($files, section.id, 1)" accept='image/*'>
+							Add Photo
+						</div>
+					</div> <!-- C -->
+
+					<div class='section' ng-if="section.type == 'D'">
+						<textarea ng-change='postChanged()' class='col-md-12' ng-model='section.text'></textarea>
+					</div> <!-- D -->
+
+					<div class='section' ng-if="section.type == 'E'">
+						<div class='container col-md-6' ng-if='section.photos[0]' ng-mouseover='photoHover = true' ng-mouseleave='photoHover = false'>
+							<img ng-class='{ rotate90 : section.photos[0].rotate == 1, rotate180 : section.photos[0].rotate == 2, rotate270 : section.photos[0].rotate == 3 }' ng-src='{{ section.photos[0].url }}' class='col-md-12'>
+							<div class='rotateBtn' ng-show='photoHover' ng-click='rotateRight(section.photos[0])'></div>
+						</div>
+						<div ng-if='!section.photos[0]' class='addPhotoBlock col-md-6 btn-primary' ngf-select="uploadSectionImage($files, section.id, 0)" accept='image/*'>
+							Add Photo
+						</div>
+						<textarea ng-change='postChanged()' class='col-md-6' ng-model='section.text'></textarea>
+					</div> <!-- E -->
+
+
+					<div class='section' ng-if="section.type == 'F'">
+						<div class='container col-md-6' ng-if='section.photos[0]' ng-mouseover='photoHover = true' ng-mouseleave='photoHover = false'>
+							<img ng-class='{ rotate90 : section.photos[0].rotate == 1, rotate180 : section.photos[0].rotate == 2, rotate270 : section.photos[0].rotate == 3 }' ng-src='{{ section.photos[0].url }}' class='col-md-12'>
+							<div class='rotateBtn' ng-show='photoHover' ng-click='rotateRight(section.photos[0])'></div>
+						</div>
+						<div ng-if='!section.photos[0]' class='addPhotoBlock col-md-6 btn-primary' ngf-select="uploadSectionImage($files, section.id, 0)" accept='image/*'>
+							Add Photo
+						</div>
+
+						<div class='container col-md-6' ng-if='section.photos[1]' ng-mouseover='photoHover = true' ng-mouseleave='photoHover = false'>
+							<img ng-class='{ rotate90 : section.photos[1].rotate == 1, rotate180 : section.photos[1].rotate == 2, rotate270 : section.photos[1].rotate == 3 }' ng-src='{{ section.photos[1].url }}' class='col-md-12'>
+							<div class='rotateBtn' ng-show='photoHover' ng-click='rotateRight(section.photos[1])'></div>
+						</div>
+						<div ng-if='!section.photos[1]' class='addPhotoBlock col-md-6 btn-primary' ngf-select="uploadSectionImage($files, section.id, 1)" accept='image/*'>
+							Add Photo
+						</div>
+					</div> <!-- F -->
+
+					<div class='section' ng-if="section.type == 'G'">
+						<textarea ng-change='postChanged()' class='col-md-6' ng-model='section.text'></textarea>
+						<textarea ng-change='postChanged()' class='col-md-6' ng-model='section.textB'></textarea>
+					</div> <!-- G -->
+
+					<div class='section' ng-if="section.type == 'H'">
+						<textarea ng-change='postChanged()' class='col-md-6' ng-model='section.text'></textarea>
+						<div class='container col-md-6' ng-if='section.photos[0]' ng-mouseover='photoHover = true' ng-mouseleave='photoHover = false'>
+							<img ng-class='{ rotate90 : section.photos[0].rotate == 1, rotate180 : section.photos[0].rotate == 2, rotate270 : section.photos[0].rotate == 3 }' ng-src='{{ section.photos[0].url }}' class='col-md-12'>
+							<div class='rotateBtn' ng-show='photoHover' ng-click='rotateRight(section.photos[0])'></div>
+						</div>
+						<div ng-if='!section.photos[0]' class='addPhotoBlock col-md-6 btn-primary' ngf-select="uploadSectionImage($files, section.id, 0)" accept='image/*'>
+							Add Photo
+						</div>
+					</div> <!-- H -->
+
+					<div ng-show='sectionHover' class='deleteSection' ng-click='deleteSection(section.id)'></div>
+				</div>
+
+				<div id='sectionEditPanel' class='container-fluid'>
+					<div id='newSectionButton' ng-click='$parent.$parent.newSectionPopup = true' class='col-md-8 btn-primary'>New Section</div>
+					<label class='col-md-2'>Album</label>
+					<input class='col-md-2' type="checkbox" ng-model='blogs[currentBlog].posts[currentPost].isAlbum' />
+				</div>
+			</div>
+
+			<div id='uploadPanel' ng-if="blogs[currentBlog].posts[currentPost].isAlbum" class='album col-md-4 container-fluid'>
+				<h3 class='col-md-12'>Album</h3>
+
+				<div id='uploadButton' class='btn-info col-md-12' ngf-select="uploadPhotos($files)" multiple accept='image/*'>Upload</div>
+				<div id='deleteButton' class='btn-danger col-md-12' ng-click='deletePhotos()'>Delete</div>
+
+
+				<div id='uploadedFileList' class='col-md-12'>
+					<h6>Uploaded Files</h6>
+					<table>
+						<tr>
+							<th><input type="checkbox" ng-click='checkAllPhotos()' ng-model='$parent.$parent.masterPhotoCheck'/></th>
+							<th>Photo</th>
+						</tr>
+						<tr ng-repeat='photo in blogs[currentBlog].posts[currentPost].album track by $index' ng-if='photo'>
+							<td><input type="checkbox" ng-model='photo.x'/></td>
+							<td>{{ photo.name }}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div> <!-- ng-if $postView -->
+
+
+	<div id='newSection' class='container-fluid' ng-if='newSectionPopup'>
+		<div id='newSectionUnderlay'></div>
+		<div id='newSectionPopup'>
+			<div id='title' class='col-md-12'>
+				<h2>New Section</h2>
+			</div>
+
+			<div id='newSectionOptions' class='col-md-12 container'>
+				<div class='col-md-6 newSectionOption container' ng-click="newSection('A')">
+					<div class='col-md-8 text'>Text</div>
+					<div class='col-md-4 photo'>Photo</div>
+				</div>
+
+				<div class='col-md-6 newSectionOption container' ng-click="newSection('B')">
+					<div class='col-md-4 text'>Text</div>
+					<div class='col-md-8 photo'>Photo</div>
+				</div>
+
+				<div class='col-md-6 newSectionOption container' ng-click="newSection('C')">
+					<div class='col-md-4 photo'>Photo</div>
+					<div class='col-md-4 text'>Text</div>
+					<div class='col-md-4 photo'>Photo</div>
+				</div>
+
+				<div class='col-md-6 newSectionOption container' ng-click="newSection('D')">
+					<div class='col-md-12 text'>Text</div>
+				</div>
+
+				<div class='col-md-6 newSectionOption container' ng-click="newSection('E')">
+					<div class='col-md-6 photo'>Photo</div>
+					<div class='col-md-6 text'>Text</div>
+				</div>
+
+				<div class='col-md-6 newSectionOption container' ng-click="newSection('F')">
+					<div class='col-md-6 photo'>Photo</div>
+					<div class='col-md-6 photo'>Photo</div>
+				</div>
+
+				<div class='col-md-6 newSectionOption container' ng-click="newSection('G')">
+					<div class='col-md-6 text'>Text</div>
+					<div class='col-md-6 text'>Text</div>
+				</div>
+
+				<div class='col-md-6 newSectionOption container' ng-click="newSection('H')">
+					<div class='col-md-6 text'>Text</div>
+					<div class='col-md-6 photo'>Photo</div>
+				</div>
+			</div>
+
+			<div id='cancelButton' class='col-md-12 btn-danger' ng-click='$parent.newSectionPopup = false'>
+				Cancel
+			</div>
+		</div> <!-- newSectionPopup -->
+	</div> <!-- newSection -->
+</div> <!-- container -->
+
+</div> <!-- blogEditor -->

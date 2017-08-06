@@ -1,0 +1,182 @@
+<div id='blog' class='container-fluid' ng-init='init()'>
+    <div id='blogNavigation' class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+        <ul class='col-xs-12 col-sm-12 col-md-12 col-lg-12 blogList'>
+			<li ng-repeat='(id, blog) in blogs track by $index' ng-click='selectBlog(id)'>{{ blog.title }}</li>
+		</ul>
+    </div>
+
+    <div id='sortPanel' class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+		<div id='back' class='col-xs-1 col-sm-1 col-md-1 col-lg-1' ng-class='{ disabled : !postView }'>
+			<p ng-click="back()">Back</p>
+		</div> <!-- back -->
+
+		<div id='searchBox' class='col-xs-5 col-sm-5 col-md-5 col-lg-5' ng-class='{ disabled : postView || currentBlog == null }'>
+			<label class='col-xs-3 col-sm-3 col-md-3 col-lg-3' for='search'>Search</label>
+			<input class='col-xs-9 col-sm-9 col-md-9 col-lg-3' type="text" name="search" placeholder='Search' ng-model='searchText' ng-change='textSearch()'  ng-disabled='postView || currentBlog == null'/>
+		</div>
+
+		<div id='selectSort' class='col-xs-12 col-sm-12 col-md-3 col-lg-3'>
+			<select class='col-xs-12 col-sm-12 col-md-12' ng-disabled='postView || currentBlog == null' ng-class='{ disabled : postView || currentBlog == null }' ng-model='selectedSort' ng-options='opt for opt in selectSort' ng-change='selectChange()'></select>
+		</div>
+	</div>
+
+    <div id='blogPosts' ng-if='!postView'>
+		<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 postCard' ng-repeat="(id, post) in blogPosts | limitTo: itemsPerPage track by $index" ng-click='selectPost(id)' ng-if='post && post.published'>
+			<div class='card'>
+				<h4 class='title'>{{ post.title }}</h4>
+				<h5 class='date'>{{ post.date | date:'MMMM d, yyyy'}}</h5>
+				<div class='photo'>
+					<img ng-if='post.img' ng-src='{{ post.img.url }}' alt='{{ post.title }}' />
+					<img ng-if='!post.img && blogs[currentBlog].defaultPhoto == true' ng-src='{{ blogs[currentBlog].defaultPhotoURL }}' alt='{{ post.title }}'/>
+					<img ng-if='!post.img && blogs[currentBlog].defaultPhoto == false' ng-src='{{ blogs[currentBlog].defaultPhotoURL }}' alt='{{ post.title }}'/>
+				</div> <!-- photo -->
+				<ul class='tags'>
+					<li class='tag' ng-repeat='tag in post.tags | limitTo: 5'>{{ tag }}<span ng-show="!$last">,&nbsp</span></li>
+				</ul> <!-- tags -->
+			</div> <!-- card -->
+		</div> <!-- postCard -->
+
+		<ul class='col-xs-12 col-sm-12 col-md-12 col-lg-12' uib-pagination total-items="blogs[currentBlog].posts.length" items-per-page="itemsPerPage" ng-model='$parent.currentPage' ng-change='changePage()'></ul>
+	</div> <!-- sort -->
+
+
+    <div id='post' ng-if='postView'>
+		<div id='titleRow'>
+			<h3 id='title' class='col-xs-12 col-sm-12 col-md-8 col-lg-8'>
+				{{ blogs[currentBlog].posts[currentPost].title }}
+			</h3>
+
+			<div id='socialMedia' class='col-xs-12 col-sm-12 col-md-4 col-lg-4 container'>
+				<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 container' id='fbShare' ng-click='shareFB()'><div tooltips tooltip-template='Share'></div></div>
+
+				<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 container' id='twitterShare' ng-click='shareTwitter()'><div  tooltips tooltip-template='Tweet'></div></div>
+
+				<div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 container' id='linkedInShare' ng-click='shareLinkedIn()'><div tooltips tooltip-template='Share'></div></div>
+			</div>
+
+			<!-- <h5 id='date' class='col-xs-12 col-sm-12 col-md-4'>{{ blogs[currentBlog].posts[currentPost].date | date:'MMMM d, yyyy'}}</h5> -->
+		</div> <!-- titleRow -->
+
+ 		<!-- Show this section if there is an album -->
+		<div id='contentBlock' ng-if='blogs[currentBlog].posts[currentPost].isAlbum' class='container-fluid col-md-8'>
+			<div class='contentSection container-fluid' ng-repeat='section in blogs[currentBlog].posts[currentPost].sections'>
+				<div ng-class="section.type" ng-if="section.type == 'A'">
+					<p ng-if='section.photoURLs' class='col-xs-8 col-sm-8 col-md-8 col-lg-8' ng-bind-html='section.text'></p>
+					<p ng-if='!section.photoURLs' class='col-xs-12 col-sm-12 col-md-12 col-lg-12' ng-bind-html='section.text'></p>
+					<img ng-if='section.photoURLs' class='col-xs-4 col-sm-4 col-md-4 col-lg-4' ng-class='{ rotate90 : section.photos[0].rotate == 1, rotate180 : section.photos[0].rotate == 2, rotate270 : section.photos[0].rotate == 3 }' ng-src='{{ section.photoURLs[0]}}' />
+				</div>
+
+				<div ng-class='section.type' ng-if="section.type == 'B'">
+					<p class='col-xs-12 col-sm-12 col-md-12 col-lg-12' ng-bind-html='section.text'></p>
+				</div>
+
+				<div ng-class='section.type' ng-if="section.type == 'C'">
+					<p class='col-xs-12 col-sm-12 col-md-12 col-lg-12' ng-bind-html='section.text'></p>
+				</div>
+
+				<div ng-class='section.type' ng-if="section.type == 'D'">
+					<p class='col-xs-12 col-sm-12 col-md-12 col-lg-12' ng-bind-html='section.text'></p>
+				</div>
+
+				<div ng-class='section.type' ng-if="section.type == 'E'">
+					<img ng-if='section.photos' class='col-xs-6 col-sm-6 col-md-6 col-lg-6' ng-class='{ rotate90 : section.photos[0].rotate == 1, rotate180 : section.photos[0].rotate == 2, rotate270 : section.photos[0].rotate == 3 }' ng-src="{{ section.photos[0].url}}">
+					<p ng-if='!section.photos' class='col-xs-12 col-sm-12 col-md-12 col-lg-12' ng-bind-html='section.text'></p>
+					<p ng-if='section.photos' class='col-xs-6 col-sm-6 col-md-6 col-lg-6' ng-bind-html='section.text'></p>
+				</div>
+
+				<div ng-class='section.type' ng-if="section.type == 'F' && section.photos">
+					<img ng-if='section.photos' class='col-xs-6 col-sm-6 col-md-6 col-lg-6' ng-class='{ rotate90 : section.photos[0].rotate == 1, rotate180 : section.photos[0].rotate == 2, rotate270 : section.photos[0].rotate == 3 }' ng-src="{{ section.photos[0].url}}">
+					<img ng-if='section.photos' class='col-xs-6 col-sm-6 col-md-6 col-lg-6' ng-class='{ rotate90 : section.photos[1].rotate == 1, rotate180 : section.photos[1].rotate == 2, rotate270 : section.photos[1].rotate == 3 }' ng-src="{{ section.photos[1].url}}">
+				</div>
+
+				<div ng-class='section.type' ng-if="section.type == 'G'">
+					<p class='col-xs-6 col-sm-6 col-md-6 col-lg-6' ng-bind-html='section.text'></p>
+					<p class='col-xs-6 col-sm-6 col-md-6 col-lg-6' ng-bind-html='section.textB'></p>
+				</div>
+
+				<div ng-class='section.type' ng-if="section.type == 'H'">
+					<p ng-if='!section.photos' class='col-xs-12 col-sm-12 col-md-12 col-lg-12' ng-bind-html='section.text'></p>
+					<p ng-if='section.photos' class='col-xs-6 col-sm-6 col-md-6 col-lg-6' ng-bind-html='section.text'></p>
+					<img ng-if='section.photos' class='col-xs-6 col-sm-6 col-md-6 col-lg-6' ng-class='{ rotate90 : section.photos[0].rotate == 1, rotate180 : section.photos[0].rotate == 2, rotate270 : section.photos[0].rotate == 3 }' ng-src="{{ section.photos[0].url}}">
+				</div>
+			</div> <!-- contentSection-->
+		</div> <!-- contentBlock -->
+
+
+		<!-- Show this section if there is not an album  -->
+		<div id='contentBlock' ng-if='!blogs[currentBlog].posts[currentPost].isAlbum' class='container-fluid col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+			<div class='contentSection container-fluid' ng-repeat='section in blogs[currentBlog].posts[currentPost].sections'>
+				<div ng-class="section.type" ng-if="section.type == 'A'">
+					<p ng-if='section.photos' class='col-xs-12 col-sm-12 col-md-8 col-lg-8' ng-bind-html='section.text'></p>
+
+					<p ng-if='!section.photos' class='col-xs-12 col-sm-12 col-md-12 col-lg-12' ng-bind-html='section.text'></p>
+
+					<div class='container col-xs-12 col-sm-12 col-md-4 col-lg-4' ng-if='section.photos'>
+						<img class='col-xs-12 col-sm-12 col-md-12 col-lg-12' ng-class='{ rotate90 : section.photos[0].rotate == 1, rotate180 : section.photos[0].rotate == 2, rotate270 : section.photos[0].rotate == 3 }' ng-src='{{ section.photos[0].url}}'/>
+					</div>
+				</div>
+
+				<div ng-class='section.type' ng-if="section.type == 'B'">
+					<div class='container col-xs-12 col-sm-12 col-md-4 col-lg-4' ng-if='section.photos'>
+						<img class='col-xs-12 col-sm-12 col-md-12 col-lg-12' ng-class='{ rotate90 : section.photos[0].rotate == 1, rotate180 : section.photos[0].rotate == 2, rotate270 : section.photos[0].rotate == 3 }' ng-src="{{ section.photos[0].url }}">
+					</div>
+					<p ng-if='section.photos' class='col-xs-12 col-sm-12 col-md-8 col-lg-8' ng-bind-html='section.text'></p>
+					<p ng-if='!section.photos' class='col-xs-12 col-sm-12 col-md-12 col-lg-12' ng-bind-html='section.text'></p>
+				</div>
+
+				<div ng-class='section.type' ng-if="section.type == 'C'">
+					<div class='container col-xs-12 col-sm-12 col-md-4 col-lg-4' ng-if='section.photos'>
+						<img class='col-xs-12 col-sm-12 col-md-12 col-lg-12' ng-class='{ rotate90 : section.photos[0].rotate == 1, rotate180 : section.photos[0].rotate == 2, rotate270 : section.photos[0].rotate == 3 }' ng-src="{{ section.photos[0].url }}">
+					</div>
+					<p ng-if='!section.photos' class='col-xs-12 col-sm-12 col-md-12 col-lg-12' ng-bind-html='section.text'></p>
+					<p ng-if='section.photos' class='col-xs-12 col-sm-12 col-md-4 col-lg-4' ng-bind-html='section.text'></p>
+
+					<div class='container col-xs-12 col-sm-12 col-md-4 col-lg-4' ng-if='section.photos'>
+						<img class='col-xs-12 col-sm-12 col-md-12 col-lg-12' ng-class='{ rotate90 : section.photos[1].rotate == 1, rotate180 : section.photos[1].rotate == 2, rotate270 : section.photos[1].rotate == 3 }' ng-src="{{ section.photos[1].url }}">
+					</div>
+				</div>
+
+				<div ng-class='section.type' ng-if="section.type == 'D'">
+					<p class='col-xs-12 col-sm-12 col-md-12 col-lg-12' ng-bind-html='section.text'></p>
+				</div>
+
+				<div ng-class='section.type' ng-if="section.type == 'E'">
+					<div class='container col-xs-12 col-sm-12 col-md-6 col-lg-6' ng-if='section.photos'>
+						<img class='col-xs-12 col-sm-12 col-md-12 col-lg-12' ng-class='{ rotate90 : section.photos[0].rotate == 1, rotate180 : section.photos[0].rotate == 2, rotate270 : section.photos[0].rotate == 3 }' ng-src="{{ section.photos[0].url}}">
+					</div>
+					<p ng-if='!section.photos' class='col-xs-12 col-sm-12 col-md-12 col-lg-12' ng-bind-html='section.text'></p>
+					<p ng-if='section.photos' class='col-xs-12 col-sm-12 col-md-6 col-lg-6' ng-bind-html='section.text'></p>
+				</div>
+
+				<div ng-class='section.type' ng-if="section.type == 'F' && section.photos">
+					<div class='container col-xs-12 col-sm-12 col-md-6 col-lg-6' ng-if='section.photos'>
+						<img class='col-xs-12 col-sm-12 col-md-12 col-lg-12' ng-class='{ rotate90 : section.photos[0].rotate == 1, rotate180 : section.photos[0].rotate == 2, rotate270 : section.photos[0].rotate == 3 }' ng-src="{{ section.photos[0].url}}">
+					</div>
+
+					<div class='container col-xs-12 col-sm-12 col-md-6 col-lg-6' ng-if='section.photos'>
+						<img class='col-xs-12 col-sm-12 col-md-12 col-lg-12' ng-class='{ rotate90 : section.photos[1].rotate == 1, rotate180 : section.photos[1].rotate == 2, rotate270 : section.photos[1].rotate == 3 }' ng-src="{{ section.photos[1].url}}">
+					</div>
+				</div>
+
+				<div ng-class='section.type' ng-if="section.type == 'G'">
+					<p class='col-xs-12 col-sm-12 col-md-6 col-lg-6' ng-bind-html='section.text'></p>
+					<p class='col-xs-12 col-sm-12 col-md-6 col-lg-6' ng-bind-html='section.textB'></p>
+				</div>
+
+				<div ng-class='section.type' ng-if="section.type == 'H'">
+					<p ng-if='!section.photos' class='col-xs-12 col-sm-12 col-md-12 col-lg-12' ng-bind-html='section.text'></p>
+					<p ng-if='section.photos' class='col-xs-12 col-sm-12 col-md-6 col-lg-6' ng-bind-html='section.text'></p>
+					<div class='container col-xs-12 col-sm-12 col-md-6 col-lg-6' ng-if='section.photos'>
+						<img ng-if='section.photos' class='col-xs-12 col-sm-12 col-md-12 col-lg-12' ng-class='{ rotate90 : section.photos[0].rotate == 1, rotate180 : section.photos[0].rotate == 2, rotate270 : section.photos[0].rotate == 3 }' ng-src="{{ section.photos[0].url}}">
+					</div>
+				</div>
+			</div> <!-- contentSection-->
+		</div> <!-- contentBlock -->
+
+		<div id='albumBlock' class='container-fluid col-xs-4 col-sm-4 col-md-4 col-lg-4' ng-if='blogs[currentBlog].posts[currentPost].isAlbum'>
+			<div class='photo' ng-repeat='photo in blogs[currentBlog].posts[currentPost].album | limitTo: 3'>
+				<img ng-click='albumView(this.$index);' ng-src="{{photo}}" />
+			</div>
+		</div> <!-- albumBlock -->
+	</div>
+</div>

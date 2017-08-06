@@ -36,42 +36,42 @@ var app = angular.module('app', ['ui.router', 'ui.bootstrap'])
                     main: true
                 }
             })
-            .state('shop', {
-                url: '/shop',
-                templateUrl: 'templates/shop/shop.html',
-                controller: 'ShopCtrl',
-                data: {
-                    title: 'Shop',
-                    authenticate: false,
-                    main: true
-                },
-                resolve: function($q, Product) {
-                    var def = $q.defer();
-                    Product.query().then(function(data) {
-                        def.resolve(data);
-                    });
-                    return def.promise;
-                }
-            })
-            .state('productDetails', {
-                url: '/products/{productId}',
-                templateUrl: 'templates/shop/productDetails.html',
-                controller: 'ProductsCtrl',
-                data: {
-                    title: '{productId}',
-                    authenticate: false,
-                    main: false
-                },
-                resolve: {
-                  	product: function ($q, $stateParams, Product) {
-                    	var def = $q.defer();
-                    		Product.get($stateParams.productId).then(function (data) {
-                      		def.resolve(data);
-                    	});
-                    	return def.promise;
-                  	}
-                }
-            })
+            // .state('shop', {
+            //     url: '/shop',
+            //     templateUrl: 'templates/shop/shop.html',
+            //     controller: 'ShopCtrl',
+            //     data: {
+            //         title: 'Shop',
+            //         authenticate: false,
+            //         main: true
+            //     },
+            //     resolve: function($q, Product) {
+            //         var def = $q.defer();
+            //         Product.query().then(function(data) {
+            //             def.resolve(data);
+            //         });
+            //         return def.promise;
+            //     }
+            // })
+            // .state('productDetails', {
+            //     url: '/products/{productId}',
+            //     templateUrl: 'templates/shop/productDetails.html',
+            //     controller: 'ProductsCtrl',
+            //     data: {
+            //         title: '{productId}',
+            //         authenticate: false,
+            //         main: false
+            //     },
+            //     resolve: {
+            //       	product: function ($q, $stateParams, Product) {
+            //         	var def = $q.defer();
+            //         		Product.get($stateParams.productId).then(function (data) {
+            //           		def.resolve(data);
+            //         	});
+            //         	return def.promise;
+            //       	}
+            //     }
+            // })
             .state('VeganRestaurant', {
                 url: '/veganRestaurant',
                 templateUrl: 'templates/veganRestaurant.html',

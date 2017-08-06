@@ -19,7 +19,7 @@ var transporter = nodemailer.createTransport({
 
 app.post('/send', function(req, res) {
     var mailOptions = {
-        to: 'keegan.lee.francis@gmail.com',
+        to: 'daniel@blue-apples.org',
         subject: req.query.subject,
         html: `
             <html>

@@ -12,8 +12,26 @@ app.service('storageService', ['$q', function($q) {
 	};
 
 	this.getRef = function(ref) {
-		if (ref == null)
-			return storage.ref();
-		return storage.ref(ref);
+		var defer = $q.defer();
+		$q.when(storage.getRef(ref)).then(function(response) {
+			defer.resolve(response);
+		});
+		return defer.promise;
+	};
+
+	this.putRef = function(ref, obj) {
+		var defer = $q.defer();
+		$q.when(storage.getRef(ref).put(obj)).then(function(response) {
+			defer.resolve(response);
+		})
+		return defer.promise;
+	};
+
+	this.deleteRef = function(ref) {
+		var defer = $q.defer();
+		$q.when(storage.getRef(ref).delete()).then(function(response) {
+			defer.resolve(response);
+		});
+		return defer.promise;
 	};
 }]);

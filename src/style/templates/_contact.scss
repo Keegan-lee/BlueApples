@@ -49,3 +49,28 @@
         }
     }
 }
+
+@media only screen and (max-width: 768px) {
+    .open, .closed {
+        height: auto !important;
+        h6 {
+            border-bottom-left-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+            border-top-right-radius: 30px !important;
+        }
+    }
+
+    #map {
+        iframe {
+            width: 250px;
+        }
+    }
+
+    .open {
+        font-size: 2.5vw;
+    }
+
+    .closed {
+        font-size: 2.5vw;
+    }
+}

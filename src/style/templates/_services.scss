@@ -72,7 +72,7 @@ $borderRadius: 30px;
                         margin: 0 auto;
                         max-width: 100%;
                     }
-                }                
+                }
 
                 .contact {
                     background-color: $white;
@@ -84,4 +84,16 @@ $borderRadius: 30px;
             }
         }
     }
+}
+
+@media only screen and (max-width: 768px) {
+    .contact {
+        display: flex;
+        flex-wrap: wrap;
+
+        .item {
+            flex-grow: 1;
+        }
+    }
+
 }
